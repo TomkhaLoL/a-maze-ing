@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dd2dp83l2ysav"]
+
+[ext_resource type="PackedScene" uid="uid://d15ehfcv30hgb" path="res://Scenes/Maze/LabyrinthTilemap.tscn" id="1_k8yox"]
+
+[node name="StageOne" type="Node3D"]
+
+[node name="LabyrinthTilemap" parent="." instance=ExtResource("1_k8yox")]
+layer_0/tile_data = PackedInt32Array(196614, 65537, 1)
