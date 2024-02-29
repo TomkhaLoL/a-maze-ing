@@ -10,9 +10,9 @@ public partial class MazeCell : Node3D {
 	[Export] private Node3D northWall;
 	[Export] private Node3D eastWall;
 	[Export] private Node3D westWall;
-
+	
 	public void SetCellWalls(List<Vector2I> cells) {
-		Vector2I position = new Vector2I((int)Position.X/2, (int)Position.Z / 2);
+		Vector2I position = new Vector2I((int)Position.X/ 2, (int)Position.Z / 2);
 		GD.Print(position);
 		foreach (var cell in cells) {
 		

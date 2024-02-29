@@ -20,10 +20,10 @@ public partial class MazePlayer : Node3D {
 	}
 	public void Move(double delta) {
 		if (Input.IsActionPressed("move_forwards") && !forwardRay.IsColliding()) {
-			Translate(Vector3.Forward * (1 * (float)delta));
+			Translate(Vector3.Forward * (6 * (float)delta));
 		}
 		if (Input.IsActionPressed("move_backwards") && !backwardRay.IsColliding()) {
-			Translate(Vector3.Back * (1 * (float)delta));
+			Translate(Vector3.Back * (6 * (float)delta));
 		}
 		if (Input.IsActionJustPressed("move_left") && !leftRay.IsColliding()) {
 			RotationDegrees = new Vector3(0, RotationDegrees.Y + 90, 0);

@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://d15ehfcv30hgb"]
+
+[ext_resource type="TileSet" uid="uid://dng2cdp1yfl73" path="res://Scenes/Maze/MazeTileSet.tres" id="1_yw1i1"]
+
+[node name="MazeTilemap" type="TileMap"]
+tile_set = ExtResource("1_yw1i1")
+format = 2
+layer_0/name = "Cells"
+layer_0/tile_data = PackedInt32Array(-65536, 0, 0, 0, 0, 0, 1, 0, 0, -65535, 0, 0, -65534, 65536, 0, -131071, 0, 0, 65537, 0, 0, -1, 0, 0)
+layer_1/name = "DoorCells"
+layer_1/tile_data = PackedInt32Array(-655348, 65537, 1, -131072, 65537, 1)

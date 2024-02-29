@@ -5,46 +5,50 @@ using System.Linq;
 using Godot.Collections;
 
 public partial class Maze3D : Node3D {
-	[Export]
-	private PackedScene cellScene;
+	[Export] private PackedScene cellScene;
 
-	[Export] 
-	private PackedScene doorCellScene;
+	[Export] private PackedScene spawnCellScene;
 
-	[Export]
-	private PackedScene tileMapScene;
+	[Export] private TileMap tileMap;
 
-	private List<Cell> cells = new List<Cell>();
-	
+	private static Vector2I MAZE_CELL_ATLAS_COORDS = new Vector2I(0, 0);
+	private static Vector2I SPAWN_MAZE_CELL_ATLAS_COORDS = new Vector2I(1, 0);
+	private static Vector2I GOLD_COIN_MAZE_CELL_ATLAS_COORDS = new Vector2I(0, 1);
+	private static Vector2I DESTINATION_MAZE_CELL_ATLAS_COORDS = new Vector2I(1, 1);
+
+	private int tileSize = 2;
 	public override void _Ready() {
 		GenerateMap();
 	}
 
 	private void GenerateMap() {
-		if(tileMapScene == null) {
-			GD.PrintErr("TileMapScene is null. Cannot generate map.");
-			return;
-		}
+		List<Vector2I> mazeCells = tileMap.GetUsedCellsById(0, 0).ToList();
+		foreach (var tileCoords in mazeCells) {
+			Vector2I atlasCoords = tileMap.GetCellAtlasCoords(0, tileCoords);
+			MazeCell cell = null;
 
-		TileMap tileMap = tileMapScene.Instantiate<TileMap>();
-		List<Vector2I> usedCells = tileMap.GetUsedCells(0).ToList();
-		List<Vector2I> doorCells = tileMap.GetUsedCells(1).ToList();
+			if (atlasCoords.Equals(MAZE_CELL_ATLAS_COORDS)) {
+				cell = cellScene.Instantiate<MazeCell>();
+			}
+			else if (atlasCoords.Equals(SPAWN_MAZE_CELL_ATLAS_COORDS)) {
+				cell = spawnCellScene.Instantiate<MazeCell>();
+			}
+			else if(atlasCoords.Equals(GOLD_COIN_MAZE_CELL_ATLAS_COORDS))
+			{
+				cell = cellScene.Instantiate<MazeCell>();
+			}
+			else if(atlasCoords.Equals(DESTINATION_MAZE_CELL_ATLAS_COORDS))
+			{
+				cell = cellScene.Instantiate<MazeCell>();
+			}
+			
+			if (cell != null) {
+				AddChild(cell);
+				cell.Translate(new Vector3(tileCoords.X * tileSize, 0, tileCoords.Y * tileSize));
+				cell.SetCellWalls(mazeCells);
+			}
+			cell = null;
+		}
 		tileMap.Free();
-		foreach (var tile in usedCells) {
-			Cell cell = cellScene.Instantiate<Cell>();
-			AddChild(cell);
-			cell.Translate(new Vector3(tile.X * 2, 0, tile.Y * 2));
-			cells.Add(cell);
-		}
-		foreach (var tile in doorCells) {
-			Cell cell = doorCellScene.Instantiate<Cell>();
-			AddChild(cell);
-			cell.Translate(new Vector3(tile.X * 2, 0, tile.Y * 2));
-			cells.Add(cell);
-		}
-		foreach(Cell cell in cells) {
-			usedCells.Add(doorCells[0]); // this door code is giga ass
-			cell.SetCellWalls(usedCells);
-		}
 	}
 }
