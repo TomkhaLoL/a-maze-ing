@@ -1,24 +1,26 @@
 [gd_scene load_steps=10 format=3 uid="uid://bbisiy4n6ylaf"]
 
 [ext_resource type="Script" path="res://Scripts/Maze/MazeCell.cs" id="1_761kg"]
-[ext_resource type="Material" uid="uid://c0hj76th5ywh0" path="res://FloorMaterial_Normal.tres" id="2_22c2j"]
-[ext_resource type="Material" uid="uid://bv48724dk87r5" path="res://WallMaterial_Normal.tres" id="2_mehf8"]
-[ext_resource type="Material" uid="uid://c4s7d114e1tme" path="res://CelingMaterial_Normal.tres" id="3_oeu65"]
+[ext_resource type="Material" uid="uid://c0hj76th5ywh0" path="res://Materials/64/FloorMaterial_64.tres" id="2_d2oir"]
+[ext_resource type="Material" uid="uid://c4s7d114e1tme" path="res://Materials/64/CelingMaterial_64.tres" id="3_isefd"]
 [ext_resource type="PackedScene" uid="uid://bxt8k5swk1p4p" path="res://Scenes/Maze/MazePlayer.tscn" id="3_upyvn"]
+[ext_resource type="Material" uid="uid://bv48724dk87r5" path="res://Materials/64/WallMaterial_64.tres" id="4_vh7j0"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_umeg0"]
-material = ExtResource("2_22c2j")
+material = ExtResource("2_d2oir")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_17dpk"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_myxuu"]
-material = ExtResource("2_mehf8")
+material = ExtResource("4_vh7j0")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_mjgcc"]
-material = ExtResource("2_mehf8")
+material = ExtResource("4_vh7j0")
 
-[node name="Cell" type="Node3D" node_paths=PackedStringArray("southWall", "northWall", "eastWall", "westWall")]
+[node name="Cell" type="Node3D" node_paths=PackedStringArray("ceiling", "floor", "southWall", "northWall", "eastWall", "westWall")]
 script = ExtResource("1_761kg")
+ceiling = NodePath("Ceiling")
+floor = NodePath("Floor")
 southWall = NodePath("SouthWall")
 northWall = NodePath("NorthWall")
 eastWall = NodePath("EastWall")
@@ -29,17 +31,17 @@ mesh = SubResource("PlaneMesh_umeg0")
 
 [node name="Ceiling" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, -3.48787e-16, -3.48787e-16, -3.48787e-16, -1, 8.74228e-08, -3.48787e-16, -8.74228e-08, -1, 1.28746e-05, 2, -0.00263596)
-material_override = ExtResource("3_oeu65")
+material_override = ExtResource("3_isefd")
 mesh = SubResource("PlaneMesh_17dpk")
 
 [node name="NorthWall" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, -4.37114e-08, -4.37114e-08, 1.91069e-15, -1, 0, 1, 1.91069e-15, 2.08165e-12, 1, -1)
-material_override = ExtResource("2_mehf8")
+material_override = ExtResource("4_vh7j0")
 mesh = SubResource("PlaneMesh_myxuu")
 
 [node name="SouthWall" type="MeshInstance3D" parent="."]
 transform = Transform3D(-1, 8.74228e-08, 4.37114e-08, -4.37114e-08, 1.91069e-15, -1, -8.74228e-08, -1, 1.91069e-15, 2.08165e-12, 1, 1)
-material_override = ExtResource("2_mehf8")
+material_override = ExtResource("4_vh7j0")
 mesh = SubResource("PlaneMesh_myxuu")
 
 [node name="WestWall" type="MeshInstance3D" parent="."]

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="TexturePack" load_steps=5 format=3 uid="uid://b3rxc80x8nkq"]
+
+[ext_resource type="Material" uid="uid://u5gisb0cn4ab" path="res://Materials/128/CelingMaterial_128.tres" id="1_dvas8"]
+[ext_resource type="Script" path="res://Scripts/ResourceDefinitions/TexturePack.cs" id="1_qoowg"]
+[ext_resource type="Material" uid="uid://fitu8n7ti46t" path="res://Materials/128/FloorMaterial_128.tres" id="2_bgkj4"]
+[ext_resource type="Material" uid="uid://cqfpr7c536ne6" path="res://Materials/128/WallMaterial_128.tres" id="3_aqedp"]
+
+[resource]
+script = ExtResource("1_qoowg")
+CeilingMaterial = ExtResource("1_dvas8")
+WallMaterial = ExtResource("3_aqedp")
+FloorMaterial = ExtResource("2_bgkj4")

@@ -1,8 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://bxt8k5swk1p4p"]
+[gd_scene load_steps=4 format=3 uid="uid://bxt8k5swk1p4p"]
 
 [ext_resource type="Script" path="res://Scripts/Maze/MazePlayer.cs" id="1_wfigr"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_brbvg"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_a67ho"]
 
 [node name="LabyrinthPlayer" type="Node3D"]
 script = ExtResource("1_wfigr")
@@ -37,5 +39,11 @@ collision_mask = 3
 target_position = Vector3(2, 2.08165e-12, 2.08165e-12)
 collision_mask = 3
 
+[node name="PlayerArea" type="Area3D" parent="PlayerMesh"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerMesh/PlayerArea"]
+shape = SubResource("CapsuleShape3D_a67ho")
+
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 light_bake_mode = 1
+omni_range = 0.594683

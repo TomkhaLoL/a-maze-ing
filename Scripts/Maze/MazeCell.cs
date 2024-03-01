@@ -1,26 +1,40 @@
 using Godot;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 
 public partial class MazeCell : Node3D {
-	private Node3D ceiling;
-	private Node3D floor;
-	[Export] private Node3D southWall;
-	[Export] private Node3D northWall;
-	[Export] private Node3D eastWall;
-	[Export] private Node3D westWall;
+	[Export] private MeshInstance3D ceiling;
+	[Export] private MeshInstance3D floor;
+	[Export] private MeshInstance3D southWall;
+	[Export] private MeshInstance3D northWall;
+	[Export] private MeshInstance3D eastWall;
+	[Export] private MeshInstance3D westWall;
+	
+	public override void _Ready() {
+		//base._Ready();
+		//ceiling = GetNode<MeshInstance3D>("Ceiling");
+		//floor = GetNode<MeshInstance3D>("Floor");
+		//northWall = GetNode<MeshInstance3D>("NorthWall");
+		//eastWall = GetNode<MeshInstance3D>("EastWall");
+		//southWall = GetNode<MeshInstance3D>("SouthWall");
+		//westWall = GetNode<MeshInstance3D>("WestWall");
+	}
+
+	public void SetTexturePack(TexturePack texturePack) {
+		southWall.MaterialOverride = texturePack.WallMaterial;
+		northWall.MaterialOverride = texturePack.WallMaterial;
+		eastWall.MaterialOverride = texturePack.WallMaterial;
+		westWall.MaterialOverride = texturePack.WallMaterial;
+		ceiling.MaterialOverlay = texturePack.CeilingMaterial;
+		floor.MaterialOverlay = texturePack.FloorMaterial;
+	}
 	
 	public void SetCellWalls(List<Vector2I> cells) {
-		Vector2I position = new Vector2I((int)Position.X/ 2, (int)Position.Z / 2);
+		Vector2I position = new Vector2I((int)Position.X/ 1, (int)Position.Z / 1);
 		GD.Print(position);
 		foreach (var cell in cells) {
-		
 			if(cell.Equals(position + Vector2I.Right)) {
-				GD.Print("Removing east wall.");
 				eastWall.QueueFree();
 			} else if(cell.Equals(position + Vector2I.Left)) {
-		 		GD.Print("Removing west wall.");
 				westWall.QueueFree();
 			} else if(cell.Equals(position + Vector2I.Up)) {
 				northWall.QueueFree();
@@ -28,5 +42,9 @@ public partial class MazeCell : Node3D {
 				southWall.QueueFree();
 			}
 		}
+	}
+
+	public void SetCellSize(float cellSize) {
+		//northWall.Mesh.
 	}
 }

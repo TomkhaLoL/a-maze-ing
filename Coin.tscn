@@ -1,0 +1,57 @@
+[gd_scene load_steps=9 format=3 uid="uid://c8nd7iukad4qe"]
+
+[ext_resource type="Texture2D" uid="uid://71w1ewamq1vj" path="res://Textures/Animated Coins/Coin_00-edited.png" id="1_3dw0w"]
+[ext_resource type="Script" path="res://Scripts/Maze/Coin.cs" id="2_pfq4k"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4ohyq"]
+atlas = ExtResource("1_3dw0w")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jouh7"]
+atlas = ExtResource("1_3dw0w")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fc7te"]
+atlas = ExtResource("1_3dw0w")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hs25x"]
+atlas = ExtResource("1_3dw0w")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2jb10"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4ohyq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jouh7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fc7te")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hs25x")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_egt7y"]
+radius = 0.11782
+
+[node name="Coin" type="AnimatedSprite3D"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0.590621, 0)
+sprite_frames = SubResource("SpriteFrames_2jb10")
+script = ExtResource("2_pfq4k")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_egt7y")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+light_color = Color(0.952941, 0.65098, 0, 1)
+omni_range = 0.878928

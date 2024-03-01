@@ -15,6 +15,10 @@ run/main_scene="res://Scenes/Maze/MazeSpawnCell.tscn"
 config/features=PackedStringArray("4.2", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Globals="*res://Scripts/Globals/Globals.cs"
+
 [dotnet]
 
 project/assembly_name="a-maze-ing"

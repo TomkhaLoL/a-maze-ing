@@ -1,22 +1,30 @@
 using Godot;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using Godot.Collections;
 
+//TODO rename to MazeManager or MazeGenerator
 public partial class Maze3D : Node3D {
 	[Export] private PackedScene cellScene;
 
 	[Export] private PackedScene spawnCellScene;
 
+	[Export] private PackedScene goldCellScene;
+
 	[Export] private TileMap tileMap;
 
-	private static Vector2I MAZE_CELL_ATLAS_COORDS = new Vector2I(0, 0);
-	private static Vector2I SPAWN_MAZE_CELL_ATLAS_COORDS = new Vector2I(1, 0);
-	private static Vector2I GOLD_COIN_MAZE_CELL_ATLAS_COORDS = new Vector2I(0, 1);
-	private static Vector2I DESTINATION_MAZE_CELL_ATLAS_COORDS = new Vector2I(1, 1);
+	[Export] private TexturePack texturePack;
 
-	private int tileSize = 2;
+	[Export] private TexturePack texturePack64;
+	[Export] private TexturePack texturePack128;
+	[Export] private TexturePack texturePack256;
+	[Export] private TexturePack texturePack512;
+
+	private static readonly Vector2I MAZE_CELL_ATLAS_COORDS = new Vector2I(0, 0);
+	private static readonly Vector2I SPAWN_MAZE_CELL_ATLAS_COORDS = new Vector2I(1, 0);
+	private static readonly Vector2I DESTINATION_MAZE_CELL_ATLAS_COORDS = new Vector2I(0, 1);
+	private static readonly Vector2I GOLD_COIN_MAZE_CELL_ATLAS_COORDS = new Vector2I(1, 1);
+
+	private int tileSize = 1;
 	public override void _Ready() {
 		GenerateMap();
 	}
@@ -35,7 +43,7 @@ public partial class Maze3D : Node3D {
 			}
 			else if(atlasCoords.Equals(GOLD_COIN_MAZE_CELL_ATLAS_COORDS))
 			{
-				cell = cellScene.Instantiate<MazeCell>();
+				cell = goldCellScene.Instantiate<MazeCell>();
 			}
 			else if(atlasCoords.Equals(DESTINATION_MAZE_CELL_ATLAS_COORDS))
 			{
@@ -46,9 +54,14 @@ public partial class Maze3D : Node3D {
 				AddChild(cell);
 				cell.Translate(new Vector3(tileCoords.X * tileSize, 0, tileCoords.Y * tileSize));
 				cell.SetCellWalls(mazeCells);
+				cell.SetTexturePack(texturePack);
 			}
 			cell = null;
 		}
 		tileMap.Free();
+	}
+
+	private void SetCellSize(float meters) {
+		
 	}
 }
