@@ -3,6 +3,7 @@
 [ext_resource type="TileSet" uid="uid://dng2cdp1yfl73" path="res://Scenes/Maze/MazeTileSet.tres" id="1_yw1i1"]
 
 [node name="MazeTilemap" type="TileMap"]
+position = Vector2(2, 1)
 tile_set = ExtResource("1_yw1i1")
 format = 2
 layer_0/name = "Cells"

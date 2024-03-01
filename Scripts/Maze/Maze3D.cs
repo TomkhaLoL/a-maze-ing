@@ -24,7 +24,7 @@ public partial class Maze3D : Node3D {
 	private static readonly Vector2I DESTINATION_MAZE_CELL_ATLAS_COORDS = new Vector2I(0, 1);
 	private static readonly Vector2I GOLD_COIN_MAZE_CELL_ATLAS_COORDS = new Vector2I(1, 1);
 
-	private int tileSize = 1;
+	private int tileSize = 2;
 	public override void _Ready() {
 		GenerateMap();
 	}

@@ -12,6 +12,8 @@ spawnCellScene = ExtResource("3_wu7t1")
 tileMap = NodePath("MazeTilemap")
 
 [node name="MazeTilemap" parent="." instance=ExtResource("4_suag8")]
+position = Vector2(2, -3)
+layer_0/tile_data = PackedInt32Array(0, 0, 0, 1, 0, 0, -65535, 0, 0, -65534, 65536, 0, 65537, 0, 0, -65533, 0, 0, 3, 0, 0, 2, 0, 0, -131070, 0, 0, 65538, 0, 0)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 omni_range = 92.0

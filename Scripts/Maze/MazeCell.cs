@@ -29,7 +29,7 @@ public partial class MazeCell : Node3D {
 	}
 	
 	public void SetCellWalls(List<Vector2I> cells) {
-		Vector2I position = new Vector2I((int)Position.X/ 1, (int)Position.Z / 1);
+		Vector2I position = new Vector2I((int)Position.X/ 2, (int)Position.Z / 2);
 		GD.Print(position);
 		foreach (var cell in cells) {
 			if(cell.Equals(position + Vector2I.Right)) {

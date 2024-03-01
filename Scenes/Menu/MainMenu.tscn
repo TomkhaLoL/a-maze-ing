@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://bw5yqphxjga1u"]
+[gd_scene load_steps=2 format=3 uid="uid://bw5yqphxjga1u"]
+
+[ext_resource type="Script" path="res://Scripts/Menu/StageSelectButton.cs" id="1_oq860"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -8,48 +10,80 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="."]
+[node name="TitleLabel" type="Label" parent="."]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.28
-anchor_top = 0.187
-anchor_right = 0.72
-anchor_bottom = 0.391
-offset_left = 233.44
-offset_top = 54.824
-offset_right = -233.44
-offset_bottom = -54.368
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -254.0
+offset_right = 254.0
+offset_bottom = 132.0
 grow_horizontal = 2
-grow_vertical = 2
 theme_override_font_sizes/font_size = 96
 text = "a-maze-ing"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
+visible = false
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.47
-anchor_top = 0.395
-anchor_right = 0.53
-anchor_bottom = 0.605
-offset_left = 14.5599
-offset_top = 48.04
-offset_right = -14.5601
-offset_bottom = -48.04
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -65.44
+offset_top = -106.0
+offset_right = 65.44
+offset_bottom = 106.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="PlayButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 30
 text = "Play"
 
 [node name="SettingsButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 30
 text = "Settings"
 
 [node name="CreditsButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 30
 text = "Credits"
 
 [node name="QuitButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 30
 text = "Quit"
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel"]
+custom_minimum_size = Vector2(40, 2.08165e-12)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="StageButton" type="Button" parent="Panel/HBoxContainer"]
+layout_mode = 2
+text = "1
+"
+script = ExtResource("1_oq860")
+
+[node name="StageButton2" type="Button" parent="Panel/HBoxContainer"]
+layout_mode = 2
+text = "1
+"
