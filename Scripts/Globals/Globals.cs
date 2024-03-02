@@ -4,6 +4,7 @@ public partial class Globals : Node {
 
     public int coinCount;
     public static Globals singleton;
+    
 
     [Signal]
     public delegate void CoinCountChangedEventHandler(int count);

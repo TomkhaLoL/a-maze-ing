@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://crs1qai3yy1bh"]
+[gd_scene load_steps=11 format=3 uid="uid://crs1qai3yy1bh"]
 
 [ext_resource type="Script" path="res://Scripts/Maze/Maze3D.cs" id="1_h0waw"]
 [ext_resource type="PackedScene" uid="uid://0is34kfyee6c" path="res://Scenes/Maze/Cells/MazeCell.tscn" id="2_8pen3"]
@@ -8,12 +8,13 @@
 [ext_resource type="Resource" uid="uid://c61kcrcpdftg0" path="res://Resources/TexturePack-x512.tres" id="5_vbdf1"]
 [ext_resource type="Script" path="res://Scripts/Globals/CoinCounter.cs" id="6_qhlko"]
 [ext_resource type="PackedScene" uid="uid://v6kwtjv63bd" path="res://gametilemap.tscn" id="7_t3v8c"]
+[ext_resource type="AudioStream" uid="uid://ewywdswhk67p" path="res://Audio/Music/easy_cheesy_bitcrushed_base-48k.mp3" id="8_f4wag"]
 
 [sub_resource type="Environment" id="Environment_0iaex"]
 volumetric_fog_enabled = true
 volumetric_fog_albedo = Color(0, 0, 0, 1)
 
-[node name="Stage" type="Node3D" node_paths=PackedStringArray("tileMap")]
+[node name="StageHole" type="Node3D" node_paths=PackedStringArray("tileMap")]
 script = ExtResource("1_h0waw")
 cellScene = ExtResource("2_8pen3")
 spawnCellScene = ExtResource("3_o5pwn")
@@ -66,5 +67,23 @@ transform = Transform3D(0.691676, -0.72197, -0.0185162, 0.000589451, -0.0250739,
 light_energy = 5.885
 sky_mode = 1
 
+[node name="BGMPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_f4wag")
+autoplay = true
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_0iaex")
+
+[node name="SfxPlayers" type="Node" parent="."]
+
+[node name="SfxPlayer1" type="AudioStreamPlayer" parent="SfxPlayers"]
+
+[node name="SfxPlayer2" type="AudioStreamPlayer" parent="SfxPlayers"]
+
+[node name="SfxPlayer3" type="AudioStreamPlayer" parent="SfxPlayers"]
+
+[node name="SfxPlayer4" type="AudioStreamPlayer" parent="SfxPlayers"]
+
+[node name="SfxPlayer5" type="AudioStreamPlayer" parent="SfxPlayers"]
+
+[node name="SfxPlayer6" type="AudioStreamPlayer" parent="SfxPlayers"]

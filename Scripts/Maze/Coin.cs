@@ -1,15 +1,19 @@
 using Godot;
 using System;
+using amazeing.Scripts.Globals;
 
 public partial class Coin : AnimatedSprite3D {
 	private MazePlayer mazePlayer;
 	private Globals globals;
 	private Area3D area;
+
+	private AudioStream coinSfx;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready() {
 		Autoplay = "default";
 		area = GetNode<Area3D>("Area3D");
 		area.AreaEntered += AreaOnAreaEntered;
+		coinSfx = GD.Load<AudioStream>("res://Audio/Sfx/coin-sfx.wav");
 	}
 
 	private void AreaOnAreaEntered(Area3D area3D) {
@@ -20,7 +24,7 @@ public partial class Coin : AnimatedSprite3D {
 
 	private void PickupCoin() {
 		Globals.singleton.AddToCoinCounter();
-		//Play Coin Sound Effect
+		AudioManager.singleton.PlaySoundEffect(coinSfx);
 		QueueFree();
 	}
 

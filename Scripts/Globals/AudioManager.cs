@@ -9,7 +9,6 @@ public partial class AudioManager : Node {
 
     public AudioStream bgmMusicNormal = GD.Load<AudioStream>("res://Audio/Music/easy_cheesy_bitcrushed_base-48k.mp3");
     public AudioStream bgmMusicCursed = GD.Load<AudioStream>("res://Audio/Music/easy_cheesy_bitcrushed_reversed.mp3");
-
     public AudioStream bgmMusicCutoff =
         GD.Load<AudioStream>("res://Audio/Music/easy_cheesy_bitcrushed_base-fuckedup.mp3");
 
@@ -18,20 +17,16 @@ public partial class AudioManager : Node {
     public static AudioManager singleton;
 
     public override void _Ready() {
-        if (singleton != null) {
+        if (singleton == null) {
             singleton = this;
         }
-
-        bgmPlayer = new AudioStreamPlayer();
-        for (int i = 0; i < maxSfxPlayers; i++) {
-            AudioStreamPlayer sfxPlayer = new AudioStreamPlayer();
-            GetTree().Root.AddChild(sfxPlayer);
-            sfxPlayerPool.Add(sfxPlayer);
-        }
-        PlayBackgroundMusic(bgmMusicNormal);
     }
 
     public void PlayBackgroundMusic(AudioStream audioStream) {
+        if (bgmPlayer == null) {
+            bgmPlayer = (AudioStreamPlayer) GetTree().Root.FindChild("BGMPlayer", true, false);
+        }
+        
         if (bgmPlayer != null) {
             bgmPlayer.Stop();
             bgmPlayer.Stream = audioStream;
@@ -56,13 +51,27 @@ public partial class AudioManager : Node {
         }
     }
 
-    private AudioStreamPlayer GetSfxPlayer() {
+    public void StopBackgroundMusic() {
+        if (bgmPlayer == null) {
+            bgmPlayer = (AudioStreamPlayer) GetTree().Root.FindChild("BGMPlayer", true, false);
+        }
+
+        bgmPlayer.Stop();
+    }
+
+    public AudioStreamPlayer GetSfxPlayer() {
+        if (sfxPlayerPool.Count == 0) {
+            Node sfxPlayers = GetTree().Root.FindChild("SfxPlayers", true, false);
+            foreach (var node in sfxPlayers.GetChildren()) {
+                var sfxPlayer = (AudioStreamPlayer)node;
+                sfxPlayerPool.Add(sfxPlayer);
+            }
+        }
         foreach (var sfxPlayer in sfxPlayerPool) {
             if (!sfxPlayer.Playing) {
                 return sfxPlayer;
             }
         }
-
         GD.PushError("No free sfxplayers, make sure to increase max sfx players or clean up old ones.");
         return null;
     }

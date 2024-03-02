@@ -10,7 +10,8 @@ public partial class Maze3D : Node3D {
 
 	[Export] private PackedScene goldCellScene;
 	[Export] private PackedScene holeCellScene;
-
+	[Export] private PackedScene flagCellScene;
+ 
 	[Export] private TileMap tileMap;
 
 	[Export] private TexturePack texturePack;
@@ -50,7 +51,7 @@ public partial class Maze3D : Node3D {
 			}
 			else if(atlasCoords.Equals(DESTINATION_MAZE_CELL_ATLAS_COORDS))
 			{
-				cell = cellScene.Instantiate<MazeCell>();
+				cell = flagCellScene.Instantiate<MazeCell>();
 			}
 			else if (atlasCoords.Equals(HOLE_MAZE_CELL_ATLAS_COORDS)) {
 				cell = holeCellScene.Instantiate<MazeCell>();

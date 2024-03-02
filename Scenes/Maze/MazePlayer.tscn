@@ -1,17 +1,16 @@
 [gd_scene load_steps=4 format=3 uid="uid://bxt8k5swk1p4p"]
 
 [ext_resource type="Script" path="res://Scripts/Maze/MazePlayer.cs" id="1_wfigr"]
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_brbvg"]
+[ext_resource type="Texture2D" uid="uid://2o36cqvowt1" path="res://Sprites/Player.png" id="2_s8sdf"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_a67ho"]
 
 [node name="LabyrinthPlayer" type="Node3D"]
 script = ExtResource("1_wfigr")
 
-[node name="PlayerMesh" type="MeshInstance3D" parent="."]
+[node name="PlayerMesh" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
-mesh = SubResource("CapsuleMesh_brbvg")
+texture = ExtResource("2_s8sdf")
 
 [node name="Camera3D" type="Camera3D" parent="PlayerMesh"]
 transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, -3.48787e-16, -3.48787e-16, 3.48787e-16, 1, -0.351391, 0.562394, -0.419068)
@@ -44,6 +43,6 @@ collision_mask = 3
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerMesh/PlayerArea"]
 shape = SubResource("CapsuleShape3D_a67ho")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
-light_bake_mode = 1
-omni_range = 0.594683
+[node name="PlayerMesh2" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+texture = ExtResource("2_s8sdf")

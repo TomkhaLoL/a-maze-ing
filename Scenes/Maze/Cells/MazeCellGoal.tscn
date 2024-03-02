@@ -1,0 +1,64 @@
+[gd_scene load_steps=10 format=3 uid="uid://c6skd25tdnga0"]
+
+[ext_resource type="Script" path="res://Scripts/Maze/MazeCell.cs" id="1_nyisg"]
+[ext_resource type="Material" uid="uid://c0hj76th5ywh0" path="res://Resources/Materials/64/FloorMaterial_64.tres" id="2_mm0qj"]
+[ext_resource type="Material" uid="uid://c4s7d114e1tme" path="res://Resources/Materials/64/CelingMaterial_64.tres" id="3_ki86d"]
+[ext_resource type="Material" uid="uid://bv48724dk87r5" path="res://Resources/Materials/64/WallMaterial_64.tres" id="4_3l7j6"]
+[ext_resource type="Texture2D" uid="uid://b232md17m26bi" path="res://Sprites/GoalFlag.png" id="5_a8mwp"]
+[ext_resource type="Script" path="res://Scripts/Maze/GoalFlag.cs" id="6_1654k"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k7o5l"]
+albedo_color = Color(0.376471, 0.356863, 0.34902, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_myxuu"]
+material = SubResource("StandardMaterial3D_k7o5l")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_di65b"]
+
+[node name="Cell" type="Node3D" node_paths=PackedStringArray("ceiling", "floor", "southWall", "northWall", "eastWall", "westWall")]
+script = ExtResource("1_nyisg")
+ceiling = NodePath("Ceiling")
+floor = NodePath("Floor")
+southWall = NodePath("SouthWall")
+northWall = NodePath("NorthWall")
+eastWall = NodePath("EastWall")
+westWall = NodePath("WestWall")
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+material_override = ExtResource("2_mm0qj")
+mesh = SubResource("PlaneMesh_myxuu")
+
+[node name="Ceiling" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, -3.48787e-16, -3.48787e-16, -3.48787e-16, -1, 8.74228e-08, -3.48787e-16, -8.74228e-08, -1, 1.28746e-05, 2, -0.00263596)
+material_override = ExtResource("3_ki86d")
+mesh = SubResource("PlaneMesh_myxuu")
+
+[node name="NorthWall" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, -4.37114e-08, -4.37114e-08, 1.91069e-15, -1, 0, 1, 1.91069e-15, 2.08165e-12, 1, -1)
+material_override = ExtResource("4_3l7j6")
+mesh = SubResource("PlaneMesh_myxuu")
+
+[node name="SouthWall" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, 8.74228e-08, 4.37114e-08, -4.37114e-08, 1.91069e-15, -1, -8.74228e-08, -1, 1.91069e-15, 2.08165e-12, 1, 1)
+material_override = ExtResource("4_3l7j6")
+mesh = SubResource("PlaneMesh_myxuu")
+
+[node name="WestWall" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.31134e-07, 1, -3.82137e-15, -4.37114e-08, 1.91069e-15, -1, -1, 1.31134e-07, 4.37114e-08, -1, 1, 2.08165e-12)
+material_override = ExtResource("4_3l7j6")
+mesh = SubResource("PlaneMesh_myxuu")
+
+[node name="EastWall" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 0, -4.37114e-08, 1.91069e-15, -1, 1, -4.37114e-08, -4.37114e-08, 1, 1, 2.08165e-12)
+material_override = ExtResource("4_3l7j6")
+mesh = SubResource("PlaneMesh_myxuu")
+
+[node name="GoalFlag" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.728339, 0)
+texture = ExtResource("5_a8mwp")
+script = ExtResource("6_1654k")
+
+[node name="Area3D" type="Area3D" parent="GoalFlag"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GoalFlag/Area3D"]
+shape = SubResource("BoxShape3D_di65b")

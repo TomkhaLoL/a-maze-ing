@@ -49,12 +49,6 @@ public partial class MazePlayer : Node3D {
 		}
 	}
 
-	private void Fall(double delta) {
-		Translate(Vector3.Down * (12 * (float)delta));
-		AudioManager audioManager = AudioManager.singleton;
-		audioManager.PlayBackgroundMusic(audioManager.bgmMusicCutoff);
-	}
-
 	private void Move(double delta) {
 		if (Input.IsActionPressed("move_forwards") && !forwardRay.IsColliding()) {
 			Translate(Vector3.Forward * (6 * (float)delta));
@@ -116,5 +110,28 @@ public partial class MazePlayer : Node3D {
 
 		RotationDegrees = new Vector3(0, rotationDegrees, 0);
 		EmitSignal(SignalName.PlayerChangeDirection, rotationDegrees);
+	}
+	
+	// this is horrible and should never be done like this...
+	// falling through the hole is a one time occurence and it shouldn't really be all happening in this class
+	// however I don't really have time to refactor this shit until the game jam is over
+	
+	private bool doOnce = false;
+	private void Fall(double delta) {
+		Translate(Vector3.Down * (12 * (float)delta));
+		if (doOnce == false) {
+			AudioManager audioManager = AudioManager.singleton;
+			audioManager.StopBackgroundMusic();
+			AudioStreamPlayer audioStreamPlayer = audioManager.GetSfxPlayer();
+			audioStreamPlayer.Stream = audioManager.bgmMusicCutoff;
+			audioStreamPlayer.Finished += AudioStreamPlayerOnFinished;
+			audioStreamPlayer.Play();
+			doOnce = true;
+		}
+		
+	}
+
+	private void AudioStreamPlayerOnFinished() {
+		GetTree().Quit();
 	}
 }

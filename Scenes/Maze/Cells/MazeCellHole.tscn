@@ -16,10 +16,9 @@ material = ExtResource("4_lwra3")
 [sub_resource type="BoxShape3D" id="BoxShape3D_xkbup"]
 size = Vector3(1, 1.86987, 1)
 
-[node name="Cell" type="Node3D" node_paths=PackedStringArray("ceiling", "floor", "southWall", "northWall", "eastWall", "westWall")]
+[node name="Cell" type="Node3D" node_paths=PackedStringArray("ceiling", "southWall", "northWall", "eastWall", "westWall")]
 script = ExtResource("1_5rhkg")
 ceiling = NodePath("Ceiling")
-floor = NodePath("")
 southWall = NodePath("SouthWall")
 northWall = NodePath("NorthWall")
 eastWall = NodePath("EastWall")
