@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="a-maze-ing"
-run/main_scene="res://Scenes/Maze/MazeSpawnCell.tscn"
+run/main_scene="res://Scenes/Maze/Cells/MazeSpawnCell.tscn"
 config/features=PackedStringArray("4.2", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -22,6 +22,10 @@ Globals="*res://Scripts/Globals/Globals.cs"
 [dotnet]
 
 project/assembly_name="a-maze-ing"
+
+[gui]
+
+theme/custom="res://GlobalTheme.tres"
 
 [input]
 

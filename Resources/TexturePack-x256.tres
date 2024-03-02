@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="TexturePack" load_steps=5 format=3 uid="uid://cgxqgrme42xti"]
 
-[ext_resource type="Material" uid="uid://d15bipbjogoym" path="res://Materials/256/CelingMaterial_256.tres" id="1_7f7kk"]
+[ext_resource type="Material" uid="uid://d15bipbjogoym" path="res://Resources/Materials/256/CelingMaterial_256.tres" id="1_7f7kk"]
 [ext_resource type="Script" path="res://Scripts/ResourceDefinitions/TexturePack.cs" id="1_iawkv"]
-[ext_resource type="Material" uid="uid://c8xgpsi77xgpv" path="res://Materials/256/FloorMaterial_256.tres" id="2_uvdgo"]
-[ext_resource type="Material" uid="uid://cfdg7i2r2gek5" path="res://Materials/256/WallMaterial_256.tres" id="3_mvyu1"]
+[ext_resource type="Material" uid="uid://c8xgpsi77xgpv" path="res://Resources/Materials/256/FloorMaterial_256.tres" id="2_uvdgo"]
+[ext_resource type="Material" uid="uid://cfdg7i2r2gek5" path="res://Resources/Materials/256/WallMaterial_256.tres" id="3_mvyu1"]
 
 [resource]
 script = ExtResource("1_iawkv")

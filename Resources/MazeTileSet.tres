@@ -1,0 +1,37 @@
+[gd_resource type="TileSet" load_steps=5 format=3 uid="uid://dng2cdp1yfl73"]
+
+[ext_resource type="Texture2D" uid="uid://daep6q2y1jg8i" path="res://Sprites/maze.png" id="1_yqnw0"]
+[ext_resource type="Texture2D" uid="uid://vcb1wnt03tvy" path="res://Sprites/maze-tileset.png" id="2_ck78t"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_v7js3"]
+texture = ExtResource("2_ck78t")
+texture_region_size = Vector2i(100, 100)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8hc04"]
+texture = ExtResource("1_yqnw0")
+texture_region_size = Vector2i(100, 100)
+0:0/0 = 0
+1:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+
+[resource]
+tile_size = Vector2i(100, 100)
+sources/2 = SubResource("TileSetAtlasSource_8hc04")
+sources/0 = SubResource("TileSetAtlasSource_v7js3")

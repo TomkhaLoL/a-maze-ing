@@ -25,7 +25,9 @@ public partial class MazeCell : Node3D {
 		eastWall.MaterialOverride = texturePack.WallMaterial;
 		westWall.MaterialOverride = texturePack.WallMaterial;
 		ceiling.MaterialOverlay = texturePack.CeilingMaterial;
-		floor.MaterialOverlay = texturePack.FloorMaterial;
+		if (floor != null) {
+			floor.MaterialOverlay = texturePack.FloorMaterial;
+		}
 	}
 	
 	public void SetCellWalls(List<Vector2I> cells) {

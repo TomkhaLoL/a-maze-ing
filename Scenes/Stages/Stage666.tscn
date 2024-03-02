@@ -1,18 +1,19 @@
 [gd_scene load_steps=10 format=3 uid="uid://0fjk5vcl4vi4"]
 
 [ext_resource type="Script" path="res://Scripts/Maze/Maze3D.cs" id="1_r00ts"]
-[ext_resource type="PackedScene" uid="uid://b8u5hpfyyqpsk" path="res://Scenes/Maze/MazeCellThin.tscn" id="2_yukrt"]
-[ext_resource type="PackedScene" uid="uid://bbisiy4n6ylaf" path="res://Scenes/Maze/MazeSpawnCell.tscn" id="3_5cuw2"]
-[ext_resource type="PackedScene" uid="uid://cuo6bkj8lamds" path="res://Scenes/Maze/CoinMazeCell.tscn" id="4_jbh2l"]
+[ext_resource type="PackedScene" uid="uid://b8u5hpfyyqpsk" path="res://Scenes/Maze/Cells/MazeCellThin.tscn" id="2_yukrt"]
+[ext_resource type="PackedScene" uid="uid://bbisiy4n6ylaf" path="res://Scenes/Maze/Cells/MazeSpawnCell.tscn" id="3_5cuw2"]
+[ext_resource type="PackedScene" uid="uid://cuo6bkj8lamds" path="res://Scenes/Maze/Cells/MazeCellCoin.tscn" id="4_jbh2l"]
 [ext_resource type="Resource" uid="uid://c61kcrcpdftg0" path="res://Resources/TexturePack-x512.tres" id="5_255no"]
-[ext_resource type="TileSet" uid="uid://dng2cdp1yfl73" path="res://Scenes/Maze/MazeTileSet.tres" id="6_dsv5v"]
+[ext_resource type="TileSet" uid="uid://dng2cdp1yfl73" path="res://Resources/MazeTileSet.tres" id="6_dsv5v"]
 [ext_resource type="Script" path="res://Scripts/Globals/CoinCounter.cs" id="7_l0dxn"]
-[ext_resource type="AudioStream" uid="uid://dscmqjrejsn87" path="res://Announcer/easy_cheesy_bitcrushed_reversed.mp3" id="8_phbu5"]
+[ext_resource type="AudioStream" uid="uid://dscmqjrejsn87" path="res://Audio/Music/easy_cheesy_bitcrushed_reversed.mp3" id="8_phbu5"]
 
 [sub_resource type="Environment" id="Environment_kw6r4"]
 ssil_enabled = true
 sdfgi_use_occlusion = true
 volumetric_fog_enabled = true
+volumetric_fog_albedo = Color(0.243137, 0.243137, 0.243137, 1)
 
 [node name="StageOne" type="Node3D" node_paths=PackedStringArray("tileMap")]
 script = ExtResource("1_r00ts")

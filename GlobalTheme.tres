@@ -1,0 +1,7 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://blnqy7efiihpa"]
+
+[ext_resource type="FontFile" uid="uid://c10ltfn3eqy7p" path="res://Fonts/press-start/prstart.ttf" id="1_xo5ss"]
+
+[resource]
+default_font = ExtResource("1_xo5ss")
+default_font_size = 12

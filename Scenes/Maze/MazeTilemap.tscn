@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://d15ehfcv30hgb"]
 
-[ext_resource type="TileSet" uid="uid://dng2cdp1yfl73" path="res://Scenes/Maze/MazeTileSet.tres" id="1_yw1i1"]
+[ext_resource type="TileSet" uid="uid://dng2cdp1yfl73" path="res://Resources/MazeTileSet.tres" id="1_yw1i1"]
 
 [node name="MazeTilemap" type="TileMap"]
 position = Vector2(2, 1)

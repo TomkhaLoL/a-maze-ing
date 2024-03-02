@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://bvx5e7ok7qpfw"]
 
 [ext_resource type="Script" path="res://Scripts/Maze/Maze3D.cs" id="1_if4xc"]
-[ext_resource type="PackedScene" uid="uid://0is34kfyee6c" path="res://Scenes/Maze/MazeCell.tscn" id="2_bk2yv"]
-[ext_resource type="PackedScene" uid="uid://bbisiy4n6ylaf" path="res://Scenes/Maze/MazeSpawnCell.tscn" id="3_wu7t1"]
+[ext_resource type="PackedScene" uid="uid://0is34kfyee6c" path="res://Scenes/Maze/Cells/MazeCell.tscn" id="2_bk2yv"]
+[ext_resource type="PackedScene" uid="uid://bbisiy4n6ylaf" path="res://Scenes/Maze/Cells/MazeSpawnCell.tscn" id="3_wu7t1"]
 [ext_resource type="PackedScene" uid="uid://d15ehfcv30hgb" path="res://Scenes/Maze/MazeTilemap.tscn" id="4_suag8"]
 
 [node name="Maze3D" type="Node3D" node_paths=PackedStringArray("tileMap")]

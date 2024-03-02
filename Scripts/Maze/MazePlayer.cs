@@ -8,6 +8,9 @@ public partial class MazePlayer : Node3D {
 	private RayCast3D leftRay;
 	private RayCast3D rightRay;
 	private RayCast3D interactRay;
+	private bool canMove = true;
+	private bool isFalling = false;
+	private Area3D playerArea;
 	public static Direction currentFacingDirection { get; private set; }
 	private Direction[] directions = (Direction[])Enum.GetValues(typeof(Direction));
 
@@ -21,6 +24,15 @@ public partial class MazePlayer : Node3D {
 		leftRay = GetNode<RayCast3D>("PlayerMesh/LeftRay");
 		rightRay = GetNode<RayCast3D>("PlayerMesh/RightRay");
 		interactRay = GetNode<RayCast3D>("PlayerMesh/InteractRay");
+		playerArea = GetNode<Area3D>("PlayerMesh/PlayerArea");
+		playerArea.AreaEntered += PlayerAreaOnAreaEntered;
+	}
+
+	private void PlayerAreaOnAreaEntered(Area3D area) {
+		if (area.Name.Equals("HoleArea")) {
+			isFalling = true;
+			canMove = false;
+		}
 	}
 
 	public void SetPlayerFacingDirection(Direction direction) {
@@ -28,10 +40,22 @@ public partial class MazePlayer : Node3D {
 	}
 
 	public override void _Process(double delta) {
-		Move(delta);
+		if (canMove) {
+			Move(delta);
+		}
+
+		if (isFalling) {
+			Fall(delta);
+		}
 	}
 
-	public void Move(double delta) {
+	private void Fall(double delta) {
+		Translate(Vector3.Down * (12 * (float)delta));
+		AudioManager audioManager = AudioManager.singleton;
+		audioManager.PlayBackgroundMusic(audioManager.bgmMusicCutoff);
+	}
+
+	private void Move(double delta) {
 		if (Input.IsActionPressed("move_forwards") && !forwardRay.IsColliding()) {
 			Translate(Vector3.Forward * (6 * (float)delta));
 		}

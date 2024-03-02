@@ -9,6 +9,7 @@ public partial class Maze3D : Node3D {
 	[Export] private PackedScene spawnCellScene;
 
 	[Export] private PackedScene goldCellScene;
+	[Export] private PackedScene holeCellScene;
 
 	[Export] private TileMap tileMap;
 
@@ -23,6 +24,8 @@ public partial class Maze3D : Node3D {
 	private static readonly Vector2I SPAWN_MAZE_CELL_ATLAS_COORDS = new Vector2I(1, 0);
 	private static readonly Vector2I DESTINATION_MAZE_CELL_ATLAS_COORDS = new Vector2I(0, 1);
 	private static readonly Vector2I GOLD_COIN_MAZE_CELL_ATLAS_COORDS = new Vector2I(1, 1);
+	private static readonly Vector2I HOLE_MAZE_CELL_ATLAS_COORDS = new Vector2I(2, 0);
+	private static readonly Vector2I CAT_MAZE_CELL_ATLAS_COORDS = new Vector2I(3, 0);
 
 	private int tileSize = 2;
 	public override void _Ready() {
@@ -48,6 +51,9 @@ public partial class Maze3D : Node3D {
 			else if(atlasCoords.Equals(DESTINATION_MAZE_CELL_ATLAS_COORDS))
 			{
 				cell = cellScene.Instantiate<MazeCell>();
+			}
+			else if (atlasCoords.Equals(HOLE_MAZE_CELL_ATLAS_COORDS)) {
+				cell = holeCellScene.Instantiate<MazeCell>();
 			}
 			
 			if (cell != null) {

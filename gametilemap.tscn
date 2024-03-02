@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://dcu40is17cmb7"]
+[gd_scene load_steps=2 format=3 uid="uid://v6kwtjv63bd"]
 
-[ext_resource type="TileSet" uid="uid://dng2cdp1yfl73" path="res://Scenes/Maze/MazeTileSet.tres" id="1_bybrf"]
+[ext_resource type="TileSet" uid="uid://dng2cdp1yfl73" path="res://Resources/MazeTileSet.tres" id="1_bybrf"]
 
 [node name="TileMap" type="TileMap"]
 tile_set = ExtResource("1_bybrf")
