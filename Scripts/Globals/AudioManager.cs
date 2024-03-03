@@ -17,8 +17,23 @@ public partial class AudioManager : Node {
     public static AudioManager singleton;
 
     public override void _Ready() {
+        GetTree().TreeChanged += OnTreeChanged;
         if (singleton == null) {
             singleton = this;
+        }
+    }
+
+    private void OnTreeChanged() {
+        FindAudioStreamPlayers();
+    }
+
+    private void FindAudioStreamPlayers() {
+        bgmPlayer = (AudioStreamPlayer) GetTree().Root.FindChild("BGMPlayer", true, false);
+        Node sfxPlayers = GetTree().Root.FindChild("SfxPlayers", true, false);
+        sfxPlayerPool.Clear();
+        foreach (var node in sfxPlayers.GetChildren()) {
+            var sfxPlayer = (AudioStreamPlayer)node;
+            sfxPlayerPool.Add(sfxPlayer);
         }
     }
 

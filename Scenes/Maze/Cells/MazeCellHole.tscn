@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bqfsjyl2v547m"]
+[gd_scene load_steps=10 format=3 uid="uid://bqfsjyl2v547m"]
 
 [ext_resource type="Script" path="res://Scripts/Maze/MazeCell.cs" id="1_5rhkg"]
 [ext_resource type="Material" uid="uid://c4s7d114e1tme" path="res://Resources/Materials/64/CelingMaterial_64.tres" id="3_v82ro"]
@@ -9,6 +9,9 @@
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_myxuu"]
 material = ExtResource("4_lwra3")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_f7x0s"]
+size = Vector3(2, 0.1, 2)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_mjgcc"]
 material = ExtResource("4_lwra3")
@@ -34,18 +37,38 @@ transform = Transform3D(1, 0, -4.37114e-08, -4.37114e-08, 1.91069e-15, -1, 0, 1,
 material_override = ExtResource("4_lwra3")
 mesh = SubResource("PlaneMesh_myxuu")
 
+[node name="StaticBody3D" type="StaticBody3D" parent="NorthWall"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NorthWall/StaticBody3D"]
+shape = SubResource("BoxShape3D_f7x0s")
+
 [node name="SouthWall" type="MeshInstance3D" parent="."]
 transform = Transform3D(-1, 8.74228e-08, 4.37114e-08, -4.37114e-08, 1.91069e-15, -1, -8.74228e-08, -1, 1.91069e-15, 2.08165e-12, 1, 1)
 material_override = ExtResource("4_lwra3")
 mesh = SubResource("PlaneMesh_myxuu")
 
+[node name="StaticBody3D" type="StaticBody3D" parent="SouthWall"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SouthWall/StaticBody3D"]
+shape = SubResource("BoxShape3D_f7x0s")
+
 [node name="WestWall" type="MeshInstance3D" parent="."]
 transform = Transform3D(1.31134e-07, 1, -3.82137e-15, -4.37114e-08, 1.91069e-15, -1, -1, 1.31134e-07, 4.37114e-08, -1, 1, 2.08165e-12)
 mesh = SubResource("PlaneMesh_myxuu")
 
+[node name="StaticBody3D" type="StaticBody3D" parent="WestWall"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WestWall/StaticBody3D"]
+shape = SubResource("BoxShape3D_f7x0s")
+
 [node name="EastWall" type="MeshInstance3D" parent="."]
 transform = Transform3D(-4.37114e-08, -1, 0, -4.37114e-08, 1.91069e-15, -1, 1, -4.37114e-08, -4.37114e-08, 1, 1, 2.08165e-12)
 mesh = SubResource("PlaneMesh_mjgcc")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="EastWall"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EastWall/StaticBody3D"]
+shape = SubResource("BoxShape3D_f7x0s")
 
 [node name="HoleArea" type="Area3D" parent="."]
 script = ExtResource("4_lqa8m")

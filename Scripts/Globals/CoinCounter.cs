@@ -1,21 +1,19 @@
 using Godot;
 using System;
 
-public partial class 
-    CoinCounter : Label
+public partial class CoinCounter : Label
 {
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		Globals.singleton.CoinCountChanged += SingletonOnCoinCountChanged;
+		
+	}
+	public override void _ExitTree() {
+		Globals.singleton.CoinCountChanged -= SingletonOnCoinCountChanged;
 	}
 
 	private void SingletonOnCoinCountChanged(int count) {
 		Text = count.ToString();
-	}
-
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
 	}
 }

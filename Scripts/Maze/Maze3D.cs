@@ -2,12 +2,11 @@ using Godot;
 using System.Collections.Generic;
 using System.Linq;
 
-//TODO rename to MazeManager or MazeGenerator
 public partial class Maze3D : Node3D {
+	[Export] private PackedScene nextStage;
+
 	[Export] private PackedScene cellScene;
-
 	[Export] private PackedScene spawnCellScene;
-
 	[Export] private PackedScene goldCellScene;
 	[Export] private PackedScene holeCellScene;
 	[Export] private PackedScene flagCellScene;
@@ -16,17 +15,20 @@ public partial class Maze3D : Node3D {
 
 	[Export] private TexturePack texturePack;
 
-	[Export] private TexturePack texturePack64;
-	[Export] private TexturePack texturePack128;
-	[Export] private TexturePack texturePack256;
-	[Export] private TexturePack texturePack512;
+	//[Export] private TexturePack texturePack64;
+	//[Export] private TexturePack texturePack128;
+	//[Export] private TexturePack texturePack256;
+	//[Export] private TexturePack texturePack512;
 
 	private static readonly Vector2I MAZE_CELL_ATLAS_COORDS = new Vector2I(0, 0);
 	private static readonly Vector2I SPAWN_MAZE_CELL_ATLAS_COORDS = new Vector2I(1, 0);
 	private static readonly Vector2I DESTINATION_MAZE_CELL_ATLAS_COORDS = new Vector2I(0, 1);
 	private static readonly Vector2I GOLD_COIN_MAZE_CELL_ATLAS_COORDS = new Vector2I(1, 1);
 	private static readonly Vector2I HOLE_MAZE_CELL_ATLAS_COORDS = new Vector2I(2, 0);
-	private static readonly Vector2I CAT_MAZE_CELL_ATLAS_COORDS = new Vector2I(3, 0);
+	private static readonly Vector2I CAT_MAZE_CELL_ATLAS_COORDS = new Vector2I(3, 0); //TODO
+
+	private PackedScene stageCompletedUIPrefab = GD.Load<PackedScene>("res://Scenes/Menu/StageCompletedUI.tscn");
+	private GoalFlag goalFlag;
 
 	private int tileSize = 2;
 	public override void _Ready() {
@@ -52,6 +54,8 @@ public partial class Maze3D : Node3D {
 			else if(atlasCoords.Equals(DESTINATION_MAZE_CELL_ATLAS_COORDS))
 			{
 				cell = flagCellScene.Instantiate<MazeCell>();
+				goalFlag = (GoalFlag) cell.FindChild("GoalFlag");
+				goalFlag.OnStageFinished += OnStageFinished; 
 			}
 			else if (atlasCoords.Equals(HOLE_MAZE_CELL_ATLAS_COORDS)) {
 				cell = holeCellScene.Instantiate<MazeCell>();
@@ -68,7 +72,19 @@ public partial class Maze3D : Node3D {
 		tileMap.Free();
 	}
 
-	private void SetCellSize(float meters) {
-		
+	private void OnStageFinished() {
+		StageCompletedUI stageCompletedUI = (StageCompletedUI) stageCompletedUIPrefab.Instantiate();
+		stageCompletedUI.continueButton.Pressed += LoadNextStage;
+		stageCompletedUI.SetScore(Globals.singleton.coinCount);
+		AddChild(stageCompletedUI);
+	}
+
+	private void LoadNextStage() {
+		if (nextStage != null) {
+			GetTree().ChangeSceneToPacked(nextStage);
+		}
+		else {
+			GD.PushError("No next stage has been set in Maze3D, pls fix");
+		}
 	}
 }

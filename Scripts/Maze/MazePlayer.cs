@@ -1,10 +1,14 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using amazeing.Scripts.Globals;
 using Godot;
 
 public partial class MazePlayer : Node3D {
-	private RayCast3D forwardRay;
-	private RayCast3D backwardRay;
+	//private RayCast3D forwardRay;
+	private List<RayCast3D> forwardRays = new List<RayCast3D>();
+	private List<RayCast3D> backwardRays = new List<RayCast3D>();
+	//private RayCast3D backwardRay;
 	private RayCast3D leftRay;
 	private RayCast3D rightRay;
 	private RayCast3D interactRay;
@@ -19,8 +23,16 @@ public partial class MazePlayer : Node3D {
 	public delegate void PlayerChangeDirectionEventHandler(int rotationDegrees);
 
 	public override void _Ready() {
-		forwardRay = GetNode<RayCast3D>("PlayerMesh/ForwardRay");
-		backwardRay = GetNode<RayCast3D>("PlayerMesh/BackwardsRay");
+		Node3D forwardRaysParent = GetNode<Node3D>("PlayerMesh/ForwardRays");
+		foreach (Node raycast in forwardRaysParent.GetChildren()) {
+			forwardRays.Add((RayCast3D) raycast);
+		}
+		
+		Node3D backwardRaysParent = GetNode<Node3D>("PlayerMesh/BackwardRays");
+		foreach (Node raycast in backwardRaysParent.GetChildren()) {
+			backwardRays.Add((RayCast3D) raycast);
+		}
+		
 		leftRay = GetNode<RayCast3D>("PlayerMesh/LeftRay");
 		rightRay = GetNode<RayCast3D>("PlayerMesh/RightRay");
 		interactRay = GetNode<RayCast3D>("PlayerMesh/InteractRay");
@@ -50,22 +62,31 @@ public partial class MazePlayer : Node3D {
 	}
 
 	private void Move(double delta) {
-		if (Input.IsActionPressed("move_forwards") && !forwardRay.IsColliding()) {
+		if (Input.IsActionPressed("move_forwards") && !AreForwardRaysColliding()) {
 			Translate(Vector3.Forward * (6 * (float)delta));
 		}
 
-		if (Input.IsActionPressed("move_backwards") && !backwardRay.IsColliding()) {
+		if (Input.IsActionPressed("move_backwards") && !AreBackwardRaysColliding()) {
 			Translate(Vector3.Back * (6 * (float)delta));
 		}
 
-		if (Input.IsActionJustPressed("move_left") && !leftRay.IsColliding()) {
+		if (Input.IsActionJustPressed("move_left")) {
 			TurnLeft();
 		}
 
-		if (Input.IsActionJustPressed("move_right") && !rightRay.IsColliding()) {
+		if (Input.IsActionJustPressed("move_right")) {
 			TurnRight();
 		}
 	}
+
+	private bool AreForwardRaysColliding() {
+		return forwardRays.Any(ray => ray.IsColliding());
+	}
+	
+	private bool AreBackwardRaysColliding() {
+		return backwardRays.Any(ray => ray.IsColliding());
+	}
+
 
 	private void TurnRight() {
 		if ((int)currentFacingDirection + 1 == directions.Length) {

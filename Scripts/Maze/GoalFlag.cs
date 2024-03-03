@@ -5,6 +5,10 @@ public partial class GoalFlag : Sprite3D {
 	private Area3D area3D;
 
 	private MazePlayer mazePlayer;
+
+	[Signal]
+	public delegate void OnStageFinishedEventHandler();
+	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready() {
 		area3D = GetNode<Area3D>("Area3D");
@@ -15,8 +19,9 @@ public partial class GoalFlag : Sprite3D {
 		if (area.Name.Equals("PlayerArea")) {
 			Announcer.PlayAnnouncerLine(Announcer.AMAZING);
 			StageViewCamera stageViewCamera = new StageViewCamera();
-			GetTree().Root.AddChild(stageViewCamera);
+			GetTree().Root.FindChild("Maze3D", true, false).AddChild(stageViewCamera);
 			stageViewCamera.StartStagePreview(GlobalPosition);
+			EmitSignal(SignalName.OnStageFinished);
 		}
 	}
 	

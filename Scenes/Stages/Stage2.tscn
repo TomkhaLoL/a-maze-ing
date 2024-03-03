@@ -1,0 +1,92 @@
+[gd_scene load_steps=13 format=3 uid="uid://dd2dp83l2ysav"]
+
+[ext_resource type="Script" path="res://Scripts/Maze/Maze3D.cs" id="1_ammlb"]
+[ext_resource type="PackedScene" uid="uid://cx6f25t16tvoj" path="res://Scenes/Stages/Stage3.tscn" id="2_vf8s0"]
+[ext_resource type="PackedScene" uid="uid://0is34kfyee6c" path="res://Scenes/Maze/Cells/MazeCell.tscn" id="3_atse6"]
+[ext_resource type="PackedScene" uid="uid://bbisiy4n6ylaf" path="res://Scenes/Maze/Cells/MazeSpawnCell.tscn" id="4_wyagc"]
+[ext_resource type="PackedScene" uid="uid://cuo6bkj8lamds" path="res://Scenes/Maze/Cells/MazeCellCoin.tscn" id="5_roclk"]
+[ext_resource type="PackedScene" uid="uid://bqfsjyl2v547m" path="res://Scenes/Maze/Cells/MazeCellHole.tscn" id="6_4l7cb"]
+[ext_resource type="PackedScene" uid="uid://c6skd25tdnga0" path="res://Scenes/Maze/Cells/MazeCellGoal.tscn" id="7_7dfcu"]
+[ext_resource type="Resource" uid="uid://jkha3pljwo6q" path="res://Resources/TexturePack-x64.tres" id="8_parbh"]
+[ext_resource type="Script" path="res://Scripts/Globals/CoinCounter.cs" id="9_q7b8f"]
+[ext_resource type="PackedScene" uid="uid://v6kwtjv63bd" path="res://gametilemap.tscn" id="10_7j54t"]
+[ext_resource type="AudioStream" uid="uid://ewywdswhk67p" path="res://Audio/Music/easy_cheesy_bitcrushed_base-48k.mp3" id="11_btcbc"]
+
+[sub_resource type="Environment" id="Environment_fnjlm"]
+volumetric_fog_enabled = true
+volumetric_fog_albedo = Color(0, 0, 0, 1)
+
+[node name="Maze3D" type="Node3D" node_paths=PackedStringArray("tileMap")]
+script = ExtResource("1_ammlb")
+nextStage = ExtResource("2_vf8s0")
+cellScene = ExtResource("3_atse6")
+spawnCellScene = ExtResource("4_wyagc")
+goldCellScene = ExtResource("5_roclk")
+holeCellScene = ExtResource("6_4l7cb")
+flagCellScene = ExtResource("7_7dfcu")
+tileMap = NodePath("TileMap")
+texturePack = ExtResource("8_parbh")
+
+[node name="UI" type="Panel" parent="."]
+anchors_preset = -1
+anchor_left = 0.453
+anchor_right = 0.547
+offset_left = 0.143982
+offset_right = -0.144043
+offset_bottom = 40.0
+grow_horizontal = 2
+
+[node name="CoinCounter" type="Label" parent="UI"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -51.0
+offset_right = 52.0
+offset_bottom = 42.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.815686, 0.572549, 0.145098, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "0
+"
+horizontal_alignment = 1
+script = ExtResource("9_q7b8f")
+
+[node name="TileMap" parent="." instance=ExtResource("10_7j54t")]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+visible = false
+light_energy = 3.734
+omni_range = 1816.0
+
+[node name="LightmapGI" type="LightmapGI" parent="."]
+environment_mode = 3
+environment_custom_color = Color(1, 1, 1, 1)
+environment_custom_energy = 14.62
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.691676, -0.72197, -0.0185162, 0.000589451, -0.0250739, 0.999685, -0.722208, -0.691469, -0.0169175, 0, 0.737855, 1.71166)
+light_energy = 5.885
+sky_mode = 1
+
+[node name="BGMPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_btcbc")
+autoplay = true
+
+[node name="SfxPlayers" type="Node" parent="."]
+
+[node name="SfxPlayer1" type="AudioStreamPlayer" parent="SfxPlayers"]
+
+[node name="SfxPlayer2" type="AudioStreamPlayer" parent="SfxPlayers"]
+
+[node name="SfxPlayer3" type="AudioStreamPlayer" parent="SfxPlayers"]
+
+[node name="SfxPlayer4" type="AudioStreamPlayer" parent="SfxPlayers"]
+
+[node name="SfxPlayer5" type="AudioStreamPlayer" parent="SfxPlayers"]
+
+[node name="SfxPlayer6" type="AudioStreamPlayer" parent="SfxPlayers"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_fnjlm")
