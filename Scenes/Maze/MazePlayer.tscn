@@ -69,7 +69,3 @@ collision_mask = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerMesh/PlayerArea"]
 shape = SubResource("CapsuleShape3D_a67ho")
-
-[node name="PlayerMesh2" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
-texture = ExtResource("2_s8sdf")

@@ -153,6 +153,7 @@ public partial class MazePlayer : Node3D {
 	}
 
 	private void AudioStreamPlayerOnFinished() {
-		GetTree().Quit();
+		Maze3D maze3D = (Maze3D)GetTree().Root.FindChild("Maze3D", true, false);
+		maze3D.LoadNextStage();
 	}
 }

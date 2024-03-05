@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://b6ln38vatiure"]
+[gd_scene load_steps=15 format=3 uid="uid://b6ln38vatiure"]
 
 [ext_resource type="Script" path="res://Scripts/Maze/Maze3D.cs" id="1_dmv2a"]
 [ext_resource type="PackedScene" uid="uid://dd2dp83l2ysav" path="res://Scenes/Stages/Stage2.tscn" id="2_hka5v"]
@@ -8,7 +8,9 @@
 [ext_resource type="PackedScene" uid="uid://bqfsjyl2v547m" path="res://Scenes/Maze/Cells/MazeCellHole.tscn" id="6_v45am"]
 [ext_resource type="PackedScene" uid="uid://c6skd25tdnga0" path="res://Scenes/Maze/Cells/MazeCellGoal.tscn" id="7_ohufo"]
 [ext_resource type="Resource" uid="uid://b3rxc80x8nkq" path="res://Resources/TexturePack-x128.tres" id="8_d187d"]
+[ext_resource type="PackedScene" uid="uid://c1af0bp5tvts2" path="res://Scenes/Maze/Cells/CrazyEmojiCell.tscn" id="8_sauom"]
 [ext_resource type="Script" path="res://Scripts/Globals/CoinCounter.cs" id="9_khnoy"]
+[ext_resource type="AudioStream" uid="uid://djn3tqdb0xiky" path="res://Audio/CrazyBob/keep-going.mp3" id="9_yyaoi"]
 [ext_resource type="PackedScene" uid="uid://v6kwtjv63bd" path="res://gametilemap.tscn" id="10_xxu1i"]
 [ext_resource type="AudioStream" uid="uid://ewywdswhk67p" path="res://Audio/Music/easy_cheesy_bitcrushed_base-48k.mp3" id="11_wolk0"]
 
@@ -24,6 +26,8 @@ spawnCellScene = ExtResource("4_uv3ce")
 goldCellScene = ExtResource("5_rdedx")
 holeCellScene = ExtResource("6_v45am")
 flagCellScene = ExtResource("7_ohufo")
+crazyBobScene = ExtResource("8_sauom")
+crazyBobVoiceLine = ExtResource("9_yyaoi")
 tileMap = NodePath("TileMap")
 texturePack = ExtResource("8_d187d")
 
@@ -54,7 +58,7 @@ horizontal_alignment = 1
 script = ExtResource("9_khnoy")
 
 [node name="TileMap" parent="." instance=ExtResource("10_xxu1i")]
-layer_0/tile_data = PackedInt32Array(196607, 0, 0, 65535, 0, 0, 65533, 0, 0, -1, 0, 0, -65537, 0, 0, -3, 0, 0, -65539, 65536, 1, 0, 0, 0, 1, 0, 0, 2, 65536, 1, 65531, 65536, 0, 65532, 0, 0, 131069, 0, 0, 196605, 65536, 1, 196606, 0, 0, 65536, 0, 0, 131072, 65536, 1, -65538, 0, 0, -65534, 0, 0, -131070, 0, 0, -196606, 0, 1)
+layer_0/tile_data = PackedInt32Array(196607, 0, 0, 65535, 0, 0, 65533, 0, 0, -1, 0, 0, -65537, 0, 0, -3, 0, 0, -65539, 65536, 1, 0, 196608, 0, 1, 0, 0, 2, 65536, 1, 65531, 65536, 0, 65532, 0, 0, 131069, 0, 0, 196605, 65536, 1, 196606, 0, 0, 65536, 0, 0, 131072, 65536, 1, -65538, 0, 0, -65534, 0, 0, -131070, 0, 0, -196606, 0, 1)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 visible = false

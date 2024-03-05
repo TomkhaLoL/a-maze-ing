@@ -8,9 +8,13 @@ public partial class StageManager : Node {
    [Export]
    private Dictionary<int, PackedScene> stages = new Dictionary<int, PackedScene>();
 
-   private PackedScene stage1 = GD.Load<PackedScene>("res://Scenes/Stages/Stage1.tscn");
-   private PackedScene stage2 = GD.Load<PackedScene>("res://Scenes/Stages/Stage2.tscn");
- 
+   public static PackedScene stage1 = GD.Load<PackedScene>("res://Scenes/Stages/Stage1.tscn");
+   public static PackedScene stage2 = GD.Load<PackedScene>("res://Scenes/Stages/Stage2.tscn");
+   public static PackedScene stage3 = GD.Load<PackedScene>("res://Scenes/Stages/Stage2.tscn");
+   public static PackedScene stage4 = GD.Load<PackedScene>("res://Scenes/Stages/Stage3.tscn");
+   
+   
+   
    private PackedScene stage666 = GD.Load<PackedScene>("res://Scenes/Stages/Stage666.tscn");
 
    private PackedScene currentScene = null;
