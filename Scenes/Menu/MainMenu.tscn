@@ -1,7 +1,54 @@
-[gd_scene load_steps=3 format=3 uid="uid://bw5yqphxjga1u"]
+[gd_scene load_steps=27 format=3 uid="uid://bw5yqphxjga1u"]
 
 [ext_resource type="Script" path="res://Scripts/Menu/StageSelectButton.cs" id="1_oq860"]
 [ext_resource type="Script" path="res://Scripts/Menu/MainMenu.cs" id="1_w5oqi"]
+[ext_resource type="Script" path="res://Scripts/Maze/Maze3D.cs" id="3_nnju3"]
+[ext_resource type="PackedScene" uid="uid://dtri04r2wg61i" path="res://Scenes/Stages/Stage0.tscn" id="4_hc2rh"]
+[ext_resource type="PackedScene" uid="uid://0is34kfyee6c" path="res://Scenes/Maze/Cells/MazeCell.tscn" id="5_7sgh8"]
+[ext_resource type="PackedScene" uid="uid://bbisiy4n6ylaf" path="res://Scenes/Maze/Cells/MazeSpawnCell.tscn" id="6_cnygv"]
+[ext_resource type="PackedScene" uid="uid://cuo6bkj8lamds" path="res://Scenes/Maze/Cells/MazeCellCoin.tscn" id="7_ydy7g"]
+[ext_resource type="PackedScene" uid="uid://bqfsjyl2v547m" path="res://Scenes/Maze/Cells/MazeCellHole.tscn" id="8_hgin4"]
+[ext_resource type="PackedScene" uid="uid://c6skd25tdnga0" path="res://Scenes/Maze/Cells/MazeCellGoal.tscn" id="9_xqera"]
+[ext_resource type="PackedScene" uid="uid://c1af0bp5tvts2" path="res://Scenes/Maze/Cells/CrazyEmojiCell.tscn" id="10_gejta"]
+[ext_resource type="AudioStream" uid="uid://b3vdemxp4cyf" path="res://Audio/CrazyBob/you-found-me.mp3" id="11_lrvki"]
+[ext_resource type="Resource" uid="uid://jkha3pljwo6q" path="res://Resources/TexturePack-x64.tres" id="12_gapsw"]
+[ext_resource type="Script" path="res://Scripts/Globals/CoinCounter.cs" id="13_bf7yh"]
+[ext_resource type="PackedScene" uid="uid://v6kwtjv63bd" path="res://gametilemap.tscn" id="14_j5gky"]
+[ext_resource type="AudioStream" uid="uid://ewywdswhk67p" path="res://Audio/Music/easy_cheesy_bitcrushed_base-48k.mp3" id="15_fbyl8"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j5vnu"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4ax6r"]
+bg_color = Color(0.462745, 0.462745, 0.462745, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ynele"]
+bg_color = Color(0.792157, 0.792157, 0.792157, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mjbbu"]
+bg_color = Color(0.101961, 0.101961, 0.101961, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u7435"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n7v0q"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4c0lt"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ihmyd"]
+bg_color = Color(0.360784, 0.360784, 0.360784, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dlnil"]
+bg_color = Color(0.317647, 0.317647, 0.317647, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m7xjn"]
+bg_color = Color(0.152941, 0.152941, 0.152941, 1)
+
+[sub_resource type="Environment" id="Environment_fnjlm"]
+volumetric_fog_enabled = true
+volumetric_fog_albedo = Color(0, 0, 0, 1)
 
 [node name="MainMenu" type="Control" node_paths=PackedStringArray("menu", "playButton", "settingsButton", "creditsButton", "quitButton", "stageSelect")]
 layout_mode = 3
@@ -24,11 +71,13 @@ anchors_preset = -1
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -254.0
+offset_top = 39.0
 offset_right = 254.0
-offset_bottom = 132.0
+offset_bottom = 171.0
 grow_horizontal = 2
-theme_override_font_sizes/font_size = 96
+theme_override_font_sizes/font_size = 40
 text = "a-maze-ing"
+horizontal_alignment = 1
 
 [node name="Menu" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -46,22 +95,38 @@ grow_vertical = 2
 
 [node name="PlayButton" type="Button" parent="Menu"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 80
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_j5vnu")
+theme_override_styles/hover = SubResource("StyleBoxFlat_4ax6r")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ynele")
+theme_override_styles/focus = SubResource("StyleBoxFlat_mjbbu")
 text = "Play"
 
 [node name="SettingsButton" type="Button" parent="Menu"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 80
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_u7435")
+theme_override_styles/hover = SubResource("StyleBoxFlat_4ax6r")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ynele")
+theme_override_styles/focus = SubResource("StyleBoxFlat_mjbbu")
 text = "Settings"
 
 [node name="CreditsButton" type="Button" parent="Menu"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 80
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_u7435")
+theme_override_styles/hover = SubResource("StyleBoxFlat_4ax6r")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ynele")
+theme_override_styles/focus = SubResource("StyleBoxFlat_mjbbu")
 text = "Credits"
 
 [node name="QuitButton" type="Button" parent="Menu"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 80
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_u7435")
+theme_override_styles/hover = SubResource("StyleBoxFlat_4ax6r")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ynele")
+theme_override_styles/focus = SubResource("StyleBoxFlat_mjbbu")
 text = "Quit"
 
 [node name="StageSelect" type="Panel" parent="."]
@@ -72,67 +137,102 @@ anchor_left = 0.5
 anchor_top = 0.292
 anchor_right = 0.5
 anchor_bottom = 0.292
-offset_left = -364.0
-offset_top = -0.216019
-offset_right = 371.0
-offset_bottom = 346.784
+offset_left = -209.0
+offset_top = 57.88
+offset_right = 213.0
+offset_bottom = 243.88
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_n7v0q")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="StageSelect"]
 layout_mode = 2
 anchor_left = 0.498
 anchor_right = 0.5
-offset_left = -366.03
-offset_right = 364.5
-offset_bottom = 88.0
+offset_left = -208.156
+offset_top = 3.0
+offset_right = 207.0
+offset_bottom = 49.0
+alignment = 1
 
 [node name="Button" type="Button" parent="StageSelect/HBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 80
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_4c0lt")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ihmyd")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_dlnil")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_m7xjn")
 text = "1"
 script = ExtResource("1_oq860")
 stageIndex = 1
 
 [node name="Button2" type="Button" parent="StageSelect/HBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 80
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_4c0lt")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ihmyd")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_dlnil")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_m7xjn")
 disabled = true
 text = "2"
 
 [node name="Button3" type="Button" parent="StageSelect/HBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 80
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_4c0lt")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ihmyd")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_dlnil")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_m7xjn")
 disabled = true
 text = "3"
 
 [node name="Button4" type="Button" parent="StageSelect/HBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 80
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_4c0lt")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ihmyd")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_dlnil")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_m7xjn")
 disabled = true
 text = "4"
 
 [node name="Button5" type="Button" parent="StageSelect/HBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 80
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_4c0lt")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ihmyd")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_dlnil")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_m7xjn")
 disabled = true
 text = "5"
 
 [node name="Button6" type="Button" parent="StageSelect/HBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 80
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_4c0lt")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ihmyd")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_dlnil")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_m7xjn")
 disabled = true
 text = "6"
 
 [node name="Button7" type="Button" parent="StageSelect/HBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 80
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_4c0lt")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ihmyd")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_dlnil")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_m7xjn")
 disabled = true
 text = "7"
 
 [node name="Button8" type="Button" parent="StageSelect/HBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 80
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_4c0lt")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ihmyd")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_dlnil")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_m7xjn")
 disabled = true
 text = "9"
 
@@ -140,56 +240,89 @@ text = "9"
 layout_mode = 2
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -367.5
-offset_top = 92.0
-offset_right = 364.5
-offset_bottom = 140.0
+offset_left = -205.0
+offset_top = 52.0
+offset_right = 208.0
+offset_bottom = 96.0
+alignment = 1
 
 [node name="Button" type="Button" parent="StageSelect/HBoxContainer2"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_4c0lt")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ihmyd")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_dlnil")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_m7xjn")
 disabled = true
 text = "10"
 
 [node name="Button2" type="Button" parent="StageSelect/HBoxContainer2"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_4c0lt")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ihmyd")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_dlnil")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_m7xjn")
 disabled = true
 text = "11"
 
 [node name="Button3" type="Button" parent="StageSelect/HBoxContainer2"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_4c0lt")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ihmyd")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_dlnil")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_m7xjn")
 disabled = true
 text = "12"
 
 [node name="Button4" type="Button" parent="StageSelect/HBoxContainer2"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_4c0lt")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ihmyd")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_dlnil")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_m7xjn")
 disabled = true
 text = "13"
 
 [node name="Button5" type="Button" parent="StageSelect/HBoxContainer2"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_4c0lt")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ihmyd")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_dlnil")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_m7xjn")
 disabled = true
 text = "14"
 
 [node name="Button6" type="Button" parent="StageSelect/HBoxContainer2"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_4c0lt")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ihmyd")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_dlnil")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_m7xjn")
 disabled = true
 text = "15"
 
 [node name="Button7" type="Button" parent="StageSelect/HBoxContainer2"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_4c0lt")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ihmyd")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_dlnil")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_m7xjn")
 disabled = true
 text = "16"
 
 [node name="Button8" type="Button" parent="StageSelect/HBoxContainer2"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_4c0lt")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ihmyd")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_dlnil")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_m7xjn")
 disabled = true
 text = "17"
 
@@ -197,56 +330,89 @@ text = "17"
 layout_mode = 2
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -367.5
-offset_top = 144.0
-offset_right = 364.5
-offset_bottom = 192.0
+offset_left = -205.0
+offset_top = 98.0
+offset_right = 208.0
+offset_bottom = 137.0
+alignment = 1
 
 [node name="Button" type="Button" parent="StageSelect/HBoxContainer3"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_4c0lt")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ihmyd")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_dlnil")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_m7xjn")
 disabled = true
 text = "18"
 
 [node name="Button2" type="Button" parent="StageSelect/HBoxContainer3"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_4c0lt")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ihmyd")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_dlnil")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_m7xjn")
 disabled = true
 text = "19"
 
 [node name="Button3" type="Button" parent="StageSelect/HBoxContainer3"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_4c0lt")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ihmyd")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_dlnil")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_m7xjn")
 disabled = true
 text = "20"
 
 [node name="Button4" type="Button" parent="StageSelect/HBoxContainer3"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_4c0lt")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ihmyd")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_dlnil")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_m7xjn")
 disabled = true
 text = "21"
 
 [node name="Button5" type="Button" parent="StageSelect/HBoxContainer3"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_4c0lt")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ihmyd")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_dlnil")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_m7xjn")
 disabled = true
 text = "22"
 
 [node name="Button6" type="Button" parent="StageSelect/HBoxContainer3"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_4c0lt")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ihmyd")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_dlnil")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_m7xjn")
 disabled = true
 text = "23"
 
 [node name="Button7" type="Button" parent="StageSelect/HBoxContainer3"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_4c0lt")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ihmyd")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_dlnil")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_m7xjn")
 disabled = true
 text = "24"
 
 [node name="Button8" type="Button" parent="StageSelect/HBoxContainer3"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_4c0lt")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ihmyd")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_dlnil")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_m7xjn")
 disabled = true
 text = "25"
 
@@ -254,172 +420,91 @@ text = "25"
 layout_mode = 2
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -367.5
-offset_top = 196.0
-offset_right = 364.5
-offset_bottom = 244.0
+offset_left = -205.0
+offset_top = 143.0
+offset_right = 209.0
+offset_bottom = 176.0
+alignment = 1
 
 [node name="Button" type="Button" parent="StageSelect/HBoxContainer4"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_4c0lt")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ihmyd")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_dlnil")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_m7xjn")
 disabled = true
 text = "26"
 
 [node name="Button2" type="Button" parent="StageSelect/HBoxContainer4"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_4c0lt")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ihmyd")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_dlnil")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_m7xjn")
 disabled = true
 text = "27"
 
 [node name="Button3" type="Button" parent="StageSelect/HBoxContainer4"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_4c0lt")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ihmyd")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_dlnil")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_m7xjn")
 disabled = true
 text = "28"
 
 [node name="Button4" type="Button" parent="StageSelect/HBoxContainer4"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_4c0lt")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ihmyd")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_dlnil")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_m7xjn")
 disabled = true
 text = "29"
 
 [node name="Button5" type="Button" parent="StageSelect/HBoxContainer4"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_4c0lt")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ihmyd")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_dlnil")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_m7xjn")
 disabled = true
 text = "30"
 
 [node name="Button6" type="Button" parent="StageSelect/HBoxContainer4"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_4c0lt")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ihmyd")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_dlnil")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_m7xjn")
 disabled = true
 text = "31"
 
 [node name="Button7" type="Button" parent="StageSelect/HBoxContainer4"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_4c0lt")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ihmyd")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_dlnil")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_m7xjn")
 disabled = true
 text = "32"
 
 [node name="Button8" type="Button" parent="StageSelect/HBoxContainer4"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_4c0lt")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ihmyd")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_dlnil")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_m7xjn")
 disabled = true
 text = "33"
-
-[node name="HBoxContainer5" type="HBoxContainer" parent="StageSelect"]
-layout_mode = 2
-anchor_left = 0.498
-anchor_right = 0.498
-offset_left = -366.03
-offset_top = 248.0
-offset_right = 365.97
-offset_bottom = 296.0
-
-[node name="Button" type="Button" parent="StageSelect/HBoxContainer5"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 40
-disabled = true
-text = "34"
-
-[node name="Button2" type="Button" parent="StageSelect/HBoxContainer5"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 40
-disabled = true
-text = "35"
-
-[node name="Button3" type="Button" parent="StageSelect/HBoxContainer5"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 40
-disabled = true
-text = "36"
-
-[node name="Button4" type="Button" parent="StageSelect/HBoxContainer5"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 40
-disabled = true
-text = "37"
-
-[node name="Button5" type="Button" parent="StageSelect/HBoxContainer5"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 40
-disabled = true
-text = "38"
-
-[node name="Button6" type="Button" parent="StageSelect/HBoxContainer5"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 40
-disabled = true
-text = "39"
-
-[node name="Button7" type="Button" parent="StageSelect/HBoxContainer5"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 40
-disabled = true
-text = "40"
-
-[node name="Button8" type="Button" parent="StageSelect/HBoxContainer5"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 40
-disabled = true
-text = "41"
-
-[node name="HBoxContainer6" type="HBoxContainer" parent="StageSelect"]
-layout_mode = 2
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -367.5
-offset_top = 300.0
-offset_right = 364.5
-offset_bottom = 348.0
-
-[node name="Button" type="Button" parent="StageSelect/HBoxContainer6"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 40
-disabled = true
-text = "42"
-
-[node name="Button2" type="Button" parent="StageSelect/HBoxContainer6"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 40
-disabled = true
-text = "43"
-
-[node name="Button3" type="Button" parent="StageSelect/HBoxContainer6"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 40
-disabled = true
-text = "44"
-
-[node name="Button4" type="Button" parent="StageSelect/HBoxContainer6"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 40
-disabled = true
-text = "45"
-
-[node name="Button5" type="Button" parent="StageSelect/HBoxContainer6"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 40
-disabled = true
-text = "46"
-
-[node name="Button6" type="Button" parent="StageSelect/HBoxContainer6"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 40
-disabled = true
-text = "47"
-
-[node name="Button7" type="Button" parent="StageSelect/HBoxContainer6"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 40
-disabled = true
-text = "48"
-
-[node name="Button8" type="Button" parent="StageSelect/HBoxContainer6"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 40
-disabled = true
-text = "49"
 
 [node name="Label" type="Label" parent="StageSelect"]
 layout_mode = 1
@@ -432,5 +517,87 @@ offset_left = -279.5
 offset_top = -0.0509949
 offset_right = 279.765
 offset_bottom = 39.949
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 20
 text = "Select a stage"
+horizontal_alignment = 1
+
+[node name="Maze3D" type="Node3D" parent="." node_paths=PackedStringArray("tileMap")]
+script = ExtResource("3_nnju3")
+nextStage = ExtResource("4_hc2rh")
+preview = true
+cellScene = ExtResource("5_7sgh8")
+spawnCellScene = ExtResource("6_cnygv")
+goldCellScene = ExtResource("7_ydy7g")
+holeCellScene = ExtResource("8_hgin4")
+flagCellScene = ExtResource("9_xqera")
+crazyBobScene = ExtResource("10_gejta")
+crazyBobVoiceLine = ExtResource("11_lrvki")
+tileMap = NodePath("TileMap")
+texturePack = ExtResource("12_gapsw")
+
+[node name="UI" type="Panel" parent="Maze3D"]
+visible = false
+anchors_preset = -1
+anchor_left = 0.453
+anchor_right = 0.547
+offset_left = 0.143982
+offset_right = -0.144043
+offset_bottom = 40.0
+grow_horizontal = 2
+
+[node name="CoinCounter" type="Label" parent="Maze3D/UI"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -51.0
+offset_right = 52.0
+offset_bottom = 42.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.815686, 0.572549, 0.145098, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "0
+"
+horizontal_alignment = 1
+script = ExtResource("13_bf7yh")
+
+[node name="TileMap" parent="Maze3D" instance=ExtResource("14_j5gky")]
+visible = false
+layer_0/tile_data = PackedInt32Array(131071, 65536, 1, 196607, 0, 0, 65533, 0, 0, -1, 0, 0, -131072, 0, 0, -3, 65536, 1, -65539, 0, 0, -131075, 0, 0, -196611, 0, 0, -196610, 0, 0, -196609, 0, 0, -262144, 65536, 1, -262143, 0, 0, -262142, 0, 0, -327681, 0, 0, -327683, 0, 0, -327684, 0, 0, -327685, 0, 0, 1, 0, 0, 131070, 0, 0, 131069, 0, 0, 131068, 0, 0, 262143, 65536, 0, 131067, 0, 0, 65530, 0, 0, 65529, 65536, 1, -7, 0, 0, -65543, 0, 0, -131079, 0, 0, -196615, 0, 0, -262151, 0, 0, -327686, 0, 0, 131066, 0, 0, -131078, 0, 0, -131077, 65536, 1, -131076, 0, 0, -131080, 0, 0, -131081, 0, 0, -65545, 0, 0, -65546, 0, 0, -65547, 0, 0, -11, 0, 0, 65525, 65536, 1, 131061, 0, 0, 196597, 0, 0, 262134, 0, 0, 262135, 0, 0, 262136, 196608, 0, 262137, 0, 0, 327673, 0, 0, 327674, 0, 0, 327675, 65536, 1, 327676, 0, 0, 327677, 0, 0, 196600, 0, 0, 131064, 0, 0, 65528, 0, 0, 262141, 0, 0, 196605, 0, 0, -393219, 0, 0, -393218, 0, 0, -393217, 0, 0, -458752, 65536, 1, -458751, 0, 0, -458750, 0, 0, -393214, 0, 0, -393213, 0, 0, -327677, 0, 0, -327678, 0, 0, -327687, 0, 0, -393223, 65536, 1, -393224, 0, 0, -393225, 0, 0, -458762, 0, 0, -458763, 0, 0, -458764, 0, 0, -393228, 65536, 1, -393229, 0, 0, -327693, 0, 0, -262157, 0, 0, -196621, 0, 0, -196620, 0, 0, -131084, 0, 0, -131083, 0, 0, -458761, 0, 0, 393210, 0, 0, 458746, 0, 0, 458745, 0, 0, 524281, 0, 0, 524280, 0, 0, 524279, 0, 0, 524278, 0, 0, 458742, 65536, 1, 458741, 0, 0, 458740, 0, 0, 327668, 0, 0, 262133, 0, 0, 393204, 0, 0, 262132, 0, 0, 524283, 0, 0, 524284, 0, 0, 524285, 0, 0, 458747, 0, 0, 524286, 65536, 1, 524287, 0, 0, 458751, 0, 0, 393216, 0, 0, 393217, 0, 0, 327681, 0, 0, 262145, 0, 0, 196609, 65536, 1, 131073, 0, 0, 65537, 0, 0, -2, 0, 0, -65536, 0, 0, -65535, 0, 0, -196608, 0, 0, -262145, 0, 0, 65524, 0, 0, 65523, 0, 0, 131058, 0, 0, 196594, 0, 0, 262130, 0, 0, 327667, 0, 0, 327666, 0, 0, 65522, 0, 0)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Maze3D"]
+visible = false
+light_energy = 3.734
+omni_range = 1816.0
+
+[node name="LightmapGI" type="LightmapGI" parent="Maze3D"]
+environment_mode = 3
+environment_custom_color = Color(1, 1, 1, 1)
+environment_custom_energy = 14.62
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Maze3D"]
+transform = Transform3D(0.691676, -0.72197, -0.0185162, 0.000589451, -0.0250739, 0.999685, -0.722208, -0.691469, -0.0169175, 0, 0.737855, 1.71166)
+light_energy = 5.885
+sky_mode = 1
+
+[node name="BGMPlayer" type="AudioStreamPlayer" parent="Maze3D"]
+stream = ExtResource("15_fbyl8")
+autoplay = true
+
+[node name="SfxPlayers" type="Node" parent="Maze3D"]
+
+[node name="SfxPlayer1" type="AudioStreamPlayer" parent="Maze3D/SfxPlayers"]
+
+[node name="SfxPlayer2" type="AudioStreamPlayer" parent="Maze3D/SfxPlayers"]
+
+[node name="SfxPlayer3" type="AudioStreamPlayer" parent="Maze3D/SfxPlayers"]
+
+[node name="SfxPlayer4" type="AudioStreamPlayer" parent="Maze3D/SfxPlayers"]
+
+[node name="SfxPlayer5" type="AudioStreamPlayer" parent="Maze3D/SfxPlayers"]
+
+[node name="SfxPlayer6" type="AudioStreamPlayer" parent="Maze3D/SfxPlayers"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Maze3D"]
+environment = SubResource("Environment_fnjlm")

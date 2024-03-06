@@ -4,6 +4,7 @@ using System.Linq;
 
 public partial class Maze3D : Node3D {
 	[Export] private PackedScene nextStage;
+	[Export] private bool preview;
 
 	[Export] private PackedScene cellScene;
 	[Export] private PackedScene spawnCellScene;
@@ -45,6 +46,10 @@ public partial class Maze3D : Node3D {
 			}
 			else if (atlasCoords.Equals(SPAWN_MAZE_CELL_ATLAS_COORDS)) {
 				cell = spawnCellScene.Instantiate<MazeCell>();
+				MazePlayer mazePlayer = (MazePlayer) cell.FindChild("LabyrinthPlayer");
+				if (preview) {
+					mazePlayer.preview = true;
+				}
 			}
 			else if (atlasCoords.Equals(GOLD_COIN_MAZE_CELL_ATLAS_COORDS)) {
 				cell = goldCellScene.Instantiate<MazeCell>();
@@ -80,9 +85,7 @@ public partial class Maze3D : Node3D {
 	}
 
 	private void BadBobStarted() {
-		GD.Print("WTF");
-		GD.Print(GetTree().Root.FindChild("Camera3D", true, false));
-		GetTree().Root.FindChild("Camera3D", true, false).QueueFree();
+		GetTree().Root.FindChild("PlayerCamera", true, false).QueueFree();
 		//Node3D player = (Node3D)GetTree().Root.FindChild("LabyrinthPlayer", true, true);
 		//player.QueueFree();
 		
@@ -101,6 +104,7 @@ public partial class Maze3D : Node3D {
 
 	public void LoadNextStage() {
 		if (nextStage != null) {
+			Globals.singleton.coinCount = 0;
 			GetTree().ChangeSceneToPacked(nextStage);
 		}
 		else {

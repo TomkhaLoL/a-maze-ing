@@ -10,9 +10,9 @@
 [ext_resource type="Resource" uid="uid://jkha3pljwo6q" path="res://Resources/TexturePack-x64.tres" id="8_62vp8"]
 [ext_resource type="PackedScene" uid="uid://c1af0bp5tvts2" path="res://Scenes/Maze/Cells/CrazyEmojiCell.tscn" id="8_nedp7"]
 [ext_resource type="AudioStream" uid="uid://b3syv64g6hd4a" path="res://Audio/CrazyBob/youre-doing-soooo-great.mp3" id="9_2li8d"]
-[ext_resource type="Script" path="res://Scripts/Globals/CoinCounter.cs" id="9_y6sjk"]
 [ext_resource type="PackedScene" uid="uid://v6kwtjv63bd" path="res://gametilemap.tscn" id="10_v8qyc"]
 [ext_resource type="AudioStream" uid="uid://ewywdswhk67p" path="res://Audio/Music/easy_cheesy_bitcrushed_base-48k.mp3" id="11_8n7ay"]
+[ext_resource type="PackedScene" uid="uid://dmga8f5a3ipax" path="res://CoinUI.tscn" id="11_d8c3m"]
 
 [sub_resource type="Environment" id="Environment_fnjlm"]
 volumetric_fog_enabled = true
@@ -31,31 +31,7 @@ crazyBobVoiceLine = ExtResource("9_2li8d")
 tileMap = NodePath("TileMap")
 texturePack = ExtResource("8_62vp8")
 
-[node name="UI" type="Panel" parent="."]
-anchors_preset = -1
-anchor_left = 0.453
-anchor_right = 0.547
-offset_left = 0.143982
-offset_right = -0.144043
-offset_bottom = 40.0
-grow_horizontal = 2
-
-[node name="CoinCounter" type="Label" parent="UI"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -51.0
-offset_right = 52.0
-offset_bottom = 42.0
-grow_horizontal = 2
-theme_override_colors/font_color = Color(0.815686, 0.572549, 0.145098, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 30
-text = "0
-"
-horizontal_alignment = 1
-script = ExtResource("9_y6sjk")
+[node name="UI" parent="." instance=ExtResource("11_d8c3m")]
 
 [node name="TileMap" parent="." instance=ExtResource("10_v8qyc")]
 layer_0/tile_data = PackedInt32Array(196607, 0, 0, 65533, 0, 0, -1, 0, 0, -65537, 0, 0, -3, 196608, 0, 131072, 0, 0, 196606, 0, 0, 196605, 65536, 1, 327679, 65536, 0, 262143, 0, 0, 131069, 0, 0, -2, 0, 0, -65536, 0, 0, -65535, 0, 0, 196609, 0, 0, 262145, 0, 0, 327681, 65536, 1, 131073, 0, 0, -131073, 0, 0, -131074, 65536, 1, 65532, 0, 0, 65531, 0, 0, 131067, 0, 0, 196603, 0, 0, 262146, 0, 0, 262147, 0, 0, 196611, 0, 0, 262139, 0, 1)

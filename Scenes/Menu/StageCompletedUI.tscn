@@ -1,22 +1,37 @@
-[gd_scene load_steps=2 format=3 uid="uid://cb1k7cycd21v5"]
+[gd_scene load_steps=7 format=3 uid="uid://cb1k7cycd21v5"]
 
 [ext_resource type="Script" path="res://Scripts/Menu/StageCompletedUI.cs" id="1_ig272"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_htiyy"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1y2uv"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pk3rk"]
+bg_color = Color(0.32549, 0.32549, 0.32549, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0bhy7"]
+bg_color = Color(0.509804, 0.509804, 0.509804, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bh062"]
+bg_color = Color(0, 0, 0, 1)
+
 [node name="StageCompletedUI" type="Panel" node_paths=PackedStringArray("scoreLabel", "timeCompletedLabel", "continueButton")]
 anchors_preset = -1
-anchor_left = 0.245
-anchor_top = 0.276
-anchor_right = 0.761
+anchor_left = 0.144
+anchor_top = 0.278
+anchor_right = 0.84
 anchor_bottom = 0.657
-offset_left = -4.8
-offset_top = 0.520004
-offset_right = -0.039978
-offset_bottom = 0.639984
+offset_left = -0.120003
+offset_top = -0.0800095
+offset_right = -0.200012
+offset_bottom = 0.479996
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_htiyy")
 script = ExtResource("1_ig272")
 scoreLabel = NodePath("ScoreLabel")
-timeCompletedLabel = NodePath("TimeLabel")
+timeCompletedLabel = NodePath("")
 continueButton = NodePath("ContinueButton")
 
 [node name="CongratulatoryLabel" type="Label" parent="."]
@@ -49,21 +64,7 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Score
 "
-
-[node name="TimeLabel" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 0.602
-anchor_right = 0.5
-anchor_bottom = 0.602
-offset_left = -42.42
-offset_top = -14.4529
-offset_right = 41.58
-offset_bottom = 14.5471
-grow_horizontal = 2
-grow_vertical = 2
-text = "Time"
+horizontal_alignment = 1
 
 [node name="ContinueButton" type="Button" parent="."]
 layout_mode = 1
@@ -78,4 +79,8 @@ offset_right = 3.57996
 offset_bottom = -31.68
 grow_horizontal = 2
 grow_vertical = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_1y2uv")
+theme_override_styles/hover = SubResource("StyleBoxFlat_pk3rk")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_0bhy7")
+theme_override_styles/focus = SubResource("StyleBoxFlat_bh062")
 text = "Continue"

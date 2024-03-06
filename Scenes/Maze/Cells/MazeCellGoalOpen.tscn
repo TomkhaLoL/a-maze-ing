@@ -1,12 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://c1af0bp5tvts2"]
+[gd_scene load_steps=11 format=3 uid="uid://cpht5varh4yaw"]
 
-[ext_resource type="Script" path="res://Scripts/Maze/MazeCell.cs" id="1_jydjm"]
-[ext_resource type="Material" uid="uid://c0hj76th5ywh0" path="res://Resources/Materials/64/FloorMaterial_64.tres" id="2_oihcr"]
-[ext_resource type="Material" uid="uid://c4s7d114e1tme" path="res://Resources/Materials/64/CelingMaterial_64.tres" id="3_sef5c"]
-[ext_resource type="Material" uid="uid://bv48724dk87r5" path="res://Resources/Materials/64/WallMaterial_64.tres" id="4_tl0cp"]
-[ext_resource type="Texture2D" uid="uid://c62gpeyvcmmjq" path="res://Textures/EditedTextures/funny-face.png" id="5_lehc3"]
-[ext_resource type="Script" path="res://Scripts/Maze/CrazyBob.cs" id="6_nqbyi"]
-[ext_resource type="Texture2D" uid="uid://cm381vdmdpvkg" path="res://Textures/EditedTextures/sad-face.png" id="7_qkxnu"]
+[ext_resource type="Script" path="res://Scripts/Maze/MazeCell.cs" id="1_c4202"]
+[ext_resource type="Material" uid="uid://c0hj76th5ywh0" path="res://Resources/Materials/64/FloorMaterial_64.tres" id="2_8xouv"]
+[ext_resource type="Material" uid="uid://c4s7d114e1tme" path="res://Resources/Materials/64/CelingMaterial_64.tres" id="3_jq8b6"]
+[ext_resource type="Material" uid="uid://bv48724dk87r5" path="res://Resources/Materials/64/WallMaterial_64.tres" id="4_6xoqy"]
+[ext_resource type="Texture2D" uid="uid://b232md17m26bi" path="res://Sprites/GoalFlag.png" id="5_j6toa"]
+[ext_resource type="Script" path="res://Scripts/Maze/GoalFlag.cs" id="6_shimw"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k7o5l"]
 albedo_color = Color(0.376471, 0.356863, 0.34902, 1)
@@ -14,84 +13,76 @@ albedo_color = Color(0.376471, 0.356863, 0.34902, 1)
 [sub_resource type="PlaneMesh" id="PlaneMesh_myxuu"]
 material = SubResource("StandardMaterial3D_k7o5l")
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_flkai"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_a83ce"]
 size = Vector3(2, 0.1, 2)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_8dpff"]
-size = Vector3(4.05353, 1, 3.78503)
+[sub_resource type="BoxShape3D" id="BoxShape3D_di65b"]
 
 [node name="Cell" type="Node3D" node_paths=PackedStringArray("ceiling", "floor", "southWall", "northWall", "eastWall", "westWall")]
-script = ExtResource("1_jydjm")
+script = ExtResource("1_c4202")
 ceiling = NodePath("Ceiling")
 floor = NodePath("Floor")
 southWall = NodePath("SouthWall")
 northWall = NodePath("NorthWall")
 eastWall = NodePath("EastWall")
 westWall = NodePath("WestWall")
+open = true
 
 [node name="Floor" type="MeshInstance3D" parent="."]
-material_override = ExtResource("2_oihcr")
+material_override = ExtResource("2_8xouv")
 mesh = SubResource("PlaneMesh_myxuu")
 
 [node name="Ceiling" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, -3.48787e-16, -3.48787e-16, -3.48787e-16, -1, 8.74228e-08, -3.48787e-16, -8.74228e-08, -1, 1.28746e-05, 2, -0.00263596)
-material_override = ExtResource("3_sef5c")
+material_override = ExtResource("3_jq8b6")
 mesh = SubResource("PlaneMesh_myxuu")
 
 [node name="NorthWall" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, -4.37114e-08, -4.37114e-08, 1.91069e-15, -1, 0, 1, 1.91069e-15, 2.08165e-12, 1, -1)
-material_override = ExtResource("4_tl0cp")
+material_override = ExtResource("4_6xoqy")
 mesh = SubResource("PlaneMesh_myxuu")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="NorthWall"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NorthWall/StaticBody3D"]
-shape = SubResource("BoxShape3D_flkai")
+shape = SubResource("BoxShape3D_a83ce")
 
 [node name="SouthWall" type="MeshInstance3D" parent="."]
 transform = Transform3D(-1, 8.74228e-08, 4.37114e-08, -4.37114e-08, 1.91069e-15, -1, -8.74228e-08, -1, 1.91069e-15, 2.08165e-12, 1, 1)
-material_override = ExtResource("4_tl0cp")
+material_override = ExtResource("4_6xoqy")
 mesh = SubResource("PlaneMesh_myxuu")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="SouthWall"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SouthWall/StaticBody3D"]
-shape = SubResource("BoxShape3D_flkai")
+shape = SubResource("BoxShape3D_a83ce")
 
 [node name="WestWall" type="MeshInstance3D" parent="."]
 transform = Transform3D(1.31134e-07, 1, -3.82137e-15, -4.37114e-08, 1.91069e-15, -1, -1, 1.31134e-07, 4.37114e-08, -1, 1, 2.08165e-12)
-material_override = ExtResource("4_tl0cp")
+material_override = ExtResource("4_6xoqy")
 mesh = SubResource("PlaneMesh_myxuu")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWall"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="WestWall/StaticBody3D"]
-shape = SubResource("BoxShape3D_flkai")
+shape = SubResource("BoxShape3D_a83ce")
 
 [node name="EastWall" type="MeshInstance3D" parent="."]
 transform = Transform3D(-4.37114e-08, -1, 0, -4.37114e-08, 1.91069e-15, -1, 1, -4.37114e-08, -4.37114e-08, 1, 1, 2.08165e-12)
-material_override = ExtResource("4_tl0cp")
+material_override = ExtResource("4_6xoqy")
 mesh = SubResource("PlaneMesh_myxuu")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWall"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="EastWall/StaticBody3D"]
-shape = SubResource("BoxShape3D_flkai")
+shape = SubResource("BoxShape3D_a83ce")
 
-[node name="CrazyBob" type="Sprite3D" parent="." node_paths=PackedStringArray("area", "audioPlayer")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0044, 0)
-texture = ExtResource("5_lehc3")
-script = ExtResource("6_nqbyi")
-area = NodePath("Area3D")
-audioPlayer = NodePath("AudioStreamPlayer3D")
-funnyFace = ExtResource("5_lehc3")
-sadFace = ExtResource("7_qkxnu")
+[node name="GoalFlag" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.728339, 0)
+texture = ExtResource("5_j6toa")
+script = ExtResource("6_shimw")
 
-[node name="Area3D" type="Area3D" parent="CrazyBob"]
+[node name="Area3D" type="Area3D" parent="GoalFlag"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="CrazyBob/Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0521545, 0, 0.187927)
-shape = SubResource("BoxShape3D_8dpff")
-
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="CrazyBob"]
-volume_db = 6.557
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GoalFlag/Area3D"]
+shape = SubResource("BoxShape3D_di65b")

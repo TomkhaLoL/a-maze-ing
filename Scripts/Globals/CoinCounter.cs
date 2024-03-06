@@ -6,8 +6,9 @@ public partial class CoinCounter : Label
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		Globals.singleton.CoinCountChanged += SingletonOnCoinCountChanged;
 		
+		Globals.singleton.CoinCountChanged += SingletonOnCoinCountChanged;
+		Text = Globals.singleton.coinCount.ToString();
 	}
 	public override void _ExitTree() {
 		Globals.singleton.CoinCountChanged -= SingletonOnCoinCountChanged;

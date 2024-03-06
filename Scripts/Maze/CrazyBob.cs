@@ -34,6 +34,7 @@ public partial class CrazyBob : Sprite3D {
 				if (badBob) {
 					AudioStreamPlayer audioStreamPlayer = AudioManager.singleton.GetSfxPlayer();
 					audioStreamPlayer.Finished += AudioPlayerOnFinished;
+					audioStreamPlayer.PitchScale = 0.8f;
 					audioStreamPlayer.Stream = voiceLine;
 					audioStreamPlayer.Play();
 					EmitSignal(SignalName.OnBadBobStarted);

@@ -8,6 +8,7 @@ public partial class MazeCell : Node3D {
 	[Export] private MeshInstance3D northWall;
 	[Export] private MeshInstance3D eastWall;
 	[Export] private MeshInstance3D westWall;
+	[Export] private bool open;
 	
 	public override void _Ready() {
 		//base._Ready();
@@ -31,6 +32,13 @@ public partial class MazeCell : Node3D {
 	}
 	
 	public void SetCellWalls(List<Vector2I> cells) {
+		if (open) {
+			eastWall.QueueFree();
+			westWall.QueueFree();
+			northWall.QueueFree();
+			southWall.QueueFree();
+			return;
+		}
 		Vector2I position = new Vector2I((int)Position.X/ 2, (int)Position.Z / 2);
 		GD.Print(position);
 		foreach (var cell in cells) {
@@ -44,6 +52,8 @@ public partial class MazeCell : Node3D {
 				southWall.QueueFree();
 			}
 		}
+
+
 	}
 
 	public void SetCellSize(float cellSize) {

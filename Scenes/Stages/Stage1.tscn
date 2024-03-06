@@ -7,11 +7,11 @@
 [ext_resource type="PackedScene" uid="uid://cuo6bkj8lamds" path="res://Scenes/Maze/Cells/MazeCellCoin.tscn" id="5_rdedx"]
 [ext_resource type="PackedScene" uid="uid://bqfsjyl2v547m" path="res://Scenes/Maze/Cells/MazeCellHole.tscn" id="6_v45am"]
 [ext_resource type="PackedScene" uid="uid://c6skd25tdnga0" path="res://Scenes/Maze/Cells/MazeCellGoal.tscn" id="7_ohufo"]
-[ext_resource type="Resource" uid="uid://b3rxc80x8nkq" path="res://Resources/TexturePack-x128.tres" id="8_d187d"]
 [ext_resource type="PackedScene" uid="uid://c1af0bp5tvts2" path="res://Scenes/Maze/Cells/CrazyEmojiCell.tscn" id="8_sauom"]
-[ext_resource type="Script" path="res://Scripts/Globals/CoinCounter.cs" id="9_khnoy"]
 [ext_resource type="AudioStream" uid="uid://djn3tqdb0xiky" path="res://Audio/CrazyBob/keep-going.mp3" id="9_yyaoi"]
+[ext_resource type="Resource" uid="uid://jkha3pljwo6q" path="res://Resources/TexturePack-x64.tres" id="10_1ollk"]
 [ext_resource type="PackedScene" uid="uid://v6kwtjv63bd" path="res://gametilemap.tscn" id="10_xxu1i"]
+[ext_resource type="PackedScene" uid="uid://dmga8f5a3ipax" path="res://CoinUI.tscn" id="11_h8qqd"]
 [ext_resource type="AudioStream" uid="uid://ewywdswhk67p" path="res://Audio/Music/easy_cheesy_bitcrushed_base-48k.mp3" id="11_wolk0"]
 
 [sub_resource type="Environment" id="Environment_fnjlm"]
@@ -29,33 +29,9 @@ flagCellScene = ExtResource("7_ohufo")
 crazyBobScene = ExtResource("8_sauom")
 crazyBobVoiceLine = ExtResource("9_yyaoi")
 tileMap = NodePath("TileMap")
-texturePack = ExtResource("8_d187d")
+texturePack = ExtResource("10_1ollk")
 
-[node name="UI" type="Panel" parent="."]
-anchors_preset = -1
-anchor_left = 0.453
-anchor_right = 0.547
-offset_left = 0.143982
-offset_right = -0.144043
-offset_bottom = 40.0
-grow_horizontal = 2
-
-[node name="CoinCounter" type="Label" parent="UI"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -51.0
-offset_right = 52.0
-offset_bottom = 42.0
-grow_horizontal = 2
-theme_override_colors/font_color = Color(0.815686, 0.572549, 0.145098, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 30
-text = "0
-"
-horizontal_alignment = 1
-script = ExtResource("9_khnoy")
+[node name="UI" parent="." instance=ExtResource("11_h8qqd")]
 
 [node name="TileMap" parent="." instance=ExtResource("10_xxu1i")]
 layer_0/tile_data = PackedInt32Array(196607, 0, 0, 65535, 0, 0, 65533, 0, 0, -1, 0, 0, -65537, 0, 0, -3, 0, 0, -65539, 65536, 1, 0, 196608, 0, 1, 0, 0, 2, 65536, 1, 65531, 65536, 0, 65532, 0, 0, 131069, 0, 0, 196605, 65536, 1, 196606, 0, 0, 65536, 0, 0, 131072, 65536, 1, -65538, 0, 0, -65534, 0, 0, -131070, 0, 0, -196606, 0, 1)

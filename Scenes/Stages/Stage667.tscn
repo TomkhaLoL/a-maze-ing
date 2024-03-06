@@ -1,0 +1,75 @@
+[gd_scene load_steps=15 format=3 uid="uid://b64i0gl6adjs2"]
+
+[ext_resource type="Script" path="res://Scripts/Maze/Maze3D.cs" id="1_s1txo"]
+[ext_resource type="PackedScene" uid="uid://nsn8aqygobta" path="res://Scenes/Stages/Stage668.tscn" id="2_ndjis"]
+[ext_resource type="PackedScene" uid="uid://0is34kfyee6c" path="res://Scenes/Maze/Cells/MazeCell.tscn" id="3_7uddv"]
+[ext_resource type="PackedScene" uid="uid://bbisiy4n6ylaf" path="res://Scenes/Maze/Cells/MazeSpawnCell.tscn" id="4_o4y43"]
+[ext_resource type="PackedScene" uid="uid://cuo6bkj8lamds" path="res://Scenes/Maze/Cells/MazeCellCoin.tscn" id="5_5vqb8"]
+[ext_resource type="PackedScene" uid="uid://bqfsjyl2v547m" path="res://Scenes/Maze/Cells/MazeCellHole.tscn" id="6_aog87"]
+[ext_resource type="PackedScene" uid="uid://c6skd25tdnga0" path="res://Scenes/Maze/Cells/MazeCellGoal.tscn" id="7_hpnur"]
+[ext_resource type="PackedScene" uid="uid://c1af0bp5tvts2" path="res://Scenes/Maze/Cells/CrazyEmojiCell.tscn" id="8_o7m0f"]
+[ext_resource type="AudioStream" uid="uid://b3syv64g6hd4a" path="res://Audio/CrazyBob/youre-doing-soooo-great.mp3" id="9_6u48k"]
+[ext_resource type="Resource" uid="uid://jkha3pljwo6q" path="res://Resources/TexturePack-x64.tres" id="10_dvicf"]
+[ext_resource type="PackedScene" uid="uid://dmga8f5a3ipax" path="res://CoinUI.tscn" id="11_sxop1"]
+[ext_resource type="PackedScene" uid="uid://v6kwtjv63bd" path="res://gametilemap.tscn" id="12_1xavu"]
+[ext_resource type="AudioStream" uid="uid://biqxejped7766" path="res://Audio/Music/easy_cheesy_bitcrushed_base.mp3" id="13_agk55"]
+
+[sub_resource type="Environment" id="Environment_fnjlm"]
+volumetric_fog_enabled = true
+volumetric_fog_albedo = Color(0, 0, 0, 1)
+
+[node name="Maze3D" type="Node3D" node_paths=PackedStringArray("tileMap")]
+script = ExtResource("1_s1txo")
+nextStage = ExtResource("2_ndjis")
+cellScene = ExtResource("3_7uddv")
+spawnCellScene = ExtResource("4_o4y43")
+goldCellScene = ExtResource("5_5vqb8")
+holeCellScene = ExtResource("6_aog87")
+flagCellScene = ExtResource("7_hpnur")
+crazyBobScene = ExtResource("8_o7m0f")
+crazyBobVoiceLine = ExtResource("9_6u48k")
+tileMap = NodePath("TileMap")
+texturePack = ExtResource("10_dvicf")
+
+[node name="UI" parent="." instance=ExtResource("11_sxop1")]
+
+[node name="TileMap" parent="." instance=ExtResource("12_1xavu")]
+layer_0/tile_data = PackedInt32Array(196607, 0, 0, 393216, 65536, 0, 327680, 0, 0, 262144, 0, 0, 196608, 0, 0, 131072, 0, 0, 131073, 0, 0, 131074, 0, 0, 131075, 0, 0, 131076, 0, 0, 196606, 0, 0, 196605, 0, 0, 196604, 0, 0, 196603, 0, 0, 262139, 0, 0, 327675, 0, 0, 393211, 0, 0, 458747, 0, 0, 524283, 0, 0, 589819, 0, 0, 655355, 0, 0, 720891, 0, 0, 131077, 0, 0, 131078, 0, 0, 196614, 0, 0, 262150, 0, 0, 327686, 0, 0, 655361, 0, 0, 720892, 0, 0, 720893, 0, 0, 720894, 0, 0, 720895, 0, 0, 655360, 0, 0, 720896, 0, 0, 786432, 0, 0, 327685, 0, 0, 327684, 0, 0, 327683, 0, 0, 655362, 0, 0, 655363, 0, 0, 655364, 0, 0, 655365, 0, 0, 720901, 0, 0, 786437, 0, 0, 851973, 0, 0, 917509, 0, 0, 917508, 0, 0, 917507, 0, 0, 917506, 0, 0, 917505, 0, 0, 917504, 0, 0, 983040, 0, 0, 1048575, 0, 0, 1048574, 0, 0, 983038, 0, 0, 917502, 0, 0, 917501, 0, 0, 917500, 0, 0, 917499, 0, 0, 917498, 0, 0, 917497, 0, 0, 917496, 0, 0, 851960, 0, 0, 786424, 0, 0, 786423, 0, 0, 720887, 0, 0, 655351, 0, 0, 589815, 0, 0, 524279, 0, 0, 458743, 0, 0, 458745, 0, 1, 458744, 0, 0)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+visible = false
+light_energy = 3.734
+omni_range = 1816.0
+
+[node name="LightmapGI" type="LightmapGI" parent="."]
+environment_mode = 3
+environment_custom_color = Color(1, 1, 1, 1)
+environment_custom_energy = 14.62
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.691676, -0.72197, -0.0185162, 0.000589451, -0.0250739, 0.999685, -0.722208, -0.691469, -0.0169175, 0, 0.737855, 1.71166)
+light_energy = 5.885
+sky_mode = 1
+
+[node name="BGMPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_agk55")
+pitch_scale = 0.98
+autoplay = true
+
+[node name="SfxPlayers" type="Node" parent="."]
+
+[node name="SfxPlayer1" type="AudioStreamPlayer" parent="SfxPlayers"]
+volume_db = -80.0
+
+[node name="SfxPlayer2" type="AudioStreamPlayer" parent="SfxPlayers"]
+
+[node name="SfxPlayer3" type="AudioStreamPlayer" parent="SfxPlayers"]
+
+[node name="SfxPlayer4" type="AudioStreamPlayer" parent="SfxPlayers"]
+
+[node name="SfxPlayer5" type="AudioStreamPlayer" parent="SfxPlayers"]
+
+[node name="SfxPlayer6" type="AudioStreamPlayer" parent="SfxPlayers"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_fnjlm")

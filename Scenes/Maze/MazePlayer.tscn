@@ -5,14 +5,15 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_a67ho"]
 
-[node name="LabyrinthPlayer" type="Node3D"]
+[node name="LabyrinthPlayer" type="Node3D" node_paths=PackedStringArray("playerCamera")]
 script = ExtResource("1_wfigr")
+playerCamera = NodePath("PlayerMesh/PlayerCamera")
 
 [node name="PlayerMesh" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 texture = ExtResource("2_s8sdf")
 
-[node name="Camera3D" type="Camera3D" parent="PlayerMesh"]
+[node name="PlayerCamera" type="Camera3D" parent="PlayerMesh"]
 transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, -3.48787e-16, -3.48787e-16, 3.48787e-16, 1, -0.351391, 0.562394, -0.419068)
 fov = 90.0
 

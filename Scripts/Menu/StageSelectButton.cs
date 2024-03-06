@@ -12,6 +12,7 @@ public partial class StageSelectButton : Button
 	}
 
 	private void OnStageSelectButtonPressed() {
-		
+		var maze3D = (Maze3D) GetTree().Root.FindChild("Maze3D", true, false);
+		maze3D.LoadNextStage();
 	}
 }
