@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bqfsjyl2v547m" path="res://Scenes/Maze/Cells/MazeCellHole.tscn" id="6_v5o6x"]
 [ext_resource type="PackedScene" uid="uid://c6skd25tdnga0" path="res://Scenes/Maze/Cells/MazeCellGoal.tscn" id="7_wkvqq"]
 [ext_resource type="Resource" uid="uid://jkha3pljwo6q" path="res://Resources/TexturePack-x64.tres" id="8_62vp8"]
-[ext_resource type="PackedScene" uid="uid://c1af0bp5tvts2" path="res://Scenes/Maze/Cells/CrazyEmojiCell.tscn" id="8_nedp7"]
+[ext_resource type="PackedScene" uid="uid://c1af0bp5tvts2" path="res://Scenes/Maze/Cells/CrazyBobCell.tscn" id="8_bcitf"]
 [ext_resource type="AudioStream" uid="uid://b3syv64g6hd4a" path="res://Audio/CrazyBob/youre-doing-soooo-great.mp3" id="9_2li8d"]
 [ext_resource type="PackedScene" uid="uid://v6kwtjv63bd" path="res://gametilemap.tscn" id="10_v8qyc"]
 [ext_resource type="AudioStream" uid="uid://ewywdswhk67p" path="res://Audio/Music/easy_cheesy_bitcrushed_base-48k.mp3" id="11_8n7ay"]
@@ -26,7 +26,7 @@ spawnCellScene = ExtResource("4_sxc65")
 goldCellScene = ExtResource("5_biy6x")
 holeCellScene = ExtResource("6_v5o6x")
 flagCellScene = ExtResource("7_wkvqq")
-crazyBobScene = ExtResource("8_nedp7")
+crazyBobScene = ExtResource("8_bcitf")
 crazyBobVoiceLine = ExtResource("9_2li8d")
 tileMap = NodePath("TileMap")
 texturePack = ExtResource("8_62vp8")

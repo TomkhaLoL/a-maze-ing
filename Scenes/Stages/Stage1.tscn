@@ -7,8 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://cuo6bkj8lamds" path="res://Scenes/Maze/Cells/MazeCellCoin.tscn" id="5_rdedx"]
 [ext_resource type="PackedScene" uid="uid://bqfsjyl2v547m" path="res://Scenes/Maze/Cells/MazeCellHole.tscn" id="6_v45am"]
 [ext_resource type="PackedScene" uid="uid://c6skd25tdnga0" path="res://Scenes/Maze/Cells/MazeCellGoal.tscn" id="7_ohufo"]
-[ext_resource type="PackedScene" uid="uid://c1af0bp5tvts2" path="res://Scenes/Maze/Cells/CrazyEmojiCell.tscn" id="8_sauom"]
-[ext_resource type="AudioStream" uid="uid://djn3tqdb0xiky" path="res://Audio/CrazyBob/keep-going.mp3" id="9_yyaoi"]
+[ext_resource type="PackedScene" uid="uid://c1af0bp5tvts2" path="res://Scenes/Maze/Cells/CrazyBobCell.tscn" id="8_qt34v"]
+[ext_resource type="AudioStream" uid="uid://dewj6gckypsfp" path="res://Audio/CrazyBob/stage2.mp3" id="9_ph8b8"]
 [ext_resource type="Resource" uid="uid://jkha3pljwo6q" path="res://Resources/TexturePack-x64.tres" id="10_1ollk"]
 [ext_resource type="PackedScene" uid="uid://v6kwtjv63bd" path="res://gametilemap.tscn" id="10_xxu1i"]
 [ext_resource type="PackedScene" uid="uid://dmga8f5a3ipax" path="res://CoinUI.tscn" id="11_h8qqd"]
@@ -26,8 +26,8 @@ spawnCellScene = ExtResource("4_uv3ce")
 goldCellScene = ExtResource("5_rdedx")
 holeCellScene = ExtResource("6_v45am")
 flagCellScene = ExtResource("7_ohufo")
-crazyBobScene = ExtResource("8_sauom")
-crazyBobVoiceLine = ExtResource("9_yyaoi")
+crazyBobScene = ExtResource("8_qt34v")
+crazyBobVoiceLine = ExtResource("9_ph8b8")
 tileMap = NodePath("TileMap")
 texturePack = ExtResource("10_1ollk")
 

@@ -6,6 +6,8 @@ public partial class GoalFlag : Sprite3D {
 
 	private MazePlayer mazePlayer;
 
+	private AudioStream announcerLine;
+
 	[Signal]
 	public delegate void OnStageFinishedEventHandler();
 	
@@ -15,9 +17,19 @@ public partial class GoalFlag : Sprite3D {
 		area3D.AreaEntered += Area3DOnAreaEntered;
 	}
 
+	public void SetStageFinishedAnnouncerLine(AudioStream announcerStageFinishedLine) {
+		announcerLine = announcerStageFinishedLine;
+	}
+ 
 	private void Area3DOnAreaEntered(Area3D area) {
 		if (area.Name.Equals("PlayerArea")) {
-			Announcer.PlayAnnouncerLine(Announcer.AMAZING);
+
+			if (announcerLine != null) {
+				Announcer.PlayAnnouncerLine(announcerLine);
+			}
+			else {
+				Announcer.PlayAnnouncerLine(Announcer.AMAZING);
+			}
 			StageViewCamera stageViewCamera = new StageViewCamera();
 			GetTree().Root.FindChild("Maze3D", true, false).AddChild(stageViewCamera);
 			stageViewCamera.StartStagePreview(GlobalPosition);

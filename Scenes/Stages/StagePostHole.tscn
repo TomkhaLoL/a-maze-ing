@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cuo6bkj8lamds" path="res://Scenes/Maze/Cells/MazeCellCoin.tscn" id="5_qpyaf"]
 [ext_resource type="PackedScene" uid="uid://bqfsjyl2v547m" path="res://Scenes/Maze/Cells/MazeCellHole.tscn" id="6_67hy5"]
 [ext_resource type="PackedScene" uid="uid://c6skd25tdnga0" path="res://Scenes/Maze/Cells/MazeCellGoal.tscn" id="7_g5u72"]
-[ext_resource type="PackedScene" uid="uid://c1af0bp5tvts2" path="res://Scenes/Maze/Cells/CrazyEmojiCell.tscn" id="8_citso"]
+[ext_resource type="PackedScene" uid="uid://bj3gbaaxd3kli" path="res://Scenes/Maze/Cells/CrazyBobCellSad.tscn" id="8_tu2m8"]
 [ext_resource type="Resource" uid="uid://jkha3pljwo6q" path="res://Resources/TexturePack-x64.tres" id="8_xhtp0"]
 [ext_resource type="AudioStream" uid="uid://dseunen1qjgjg" path="res://Audio/Announcer/spookyghost.mp3" id="9_3axa2"]
 [ext_resource type="PackedScene" uid="uid://v6kwtjv63bd" path="res://gametilemap.tscn" id="10_x0vdr"]
@@ -15,6 +15,7 @@
 
 [sub_resource type="Environment" id="Environment_fnjlm"]
 background_mode = 1
+ambient_light_color = Color(0.145098, 0.145098, 0.145098, 1)
 volumetric_fog_enabled = true
 volumetric_fog_density = 0.0
 volumetric_fog_albedo = Color(0, 0, 0, 1)
@@ -22,25 +23,26 @@ volumetric_fog_albedo = Color(0, 0, 0, 1)
 [node name="Maze3D" type="Node3D" node_paths=PackedStringArray("tileMap")]
 script = ExtResource("1_13o01")
 nextStage = ExtResource("2_ah1a3")
+postHole = true
 cellScene = ExtResource("3_33yj5")
 spawnCellScene = ExtResource("4_2rn8n")
 goldCellScene = ExtResource("5_qpyaf")
 holeCellScene = ExtResource("6_67hy5")
 flagCellScene = ExtResource("7_g5u72")
-crazyBobScene = ExtResource("8_citso")
+crazyBobScene = ExtResource("8_tu2m8")
 crazyBobVoiceLine = ExtResource("9_3axa2")
-postHole = true
 tileMap = NodePath("TileMap")
 texturePack = ExtResource("8_xhtp0")
 
 [node name="UI" parent="." instance=ExtResource("11_nhree")]
+visible = false
 
 [node name="TileMap" parent="." instance=ExtResource("10_x0vdr")]
-layer_0/tile_data = PackedInt32Array(-196611, 0, 0, -196610, 0, 0, -196609, 0, 0, -262144, 0, 0, -262143, 196608, 0, 458748, 65536, 0, 393212, 0, 0, 327676, 0, 0, 196604, 0, 0, 131068, 0, 0, 65532, 0, 0, -4, 0, 0, -65540, 0, 0, -131076, 0, 0, -196612, 65536, 1, 262140, 0, 0)
+layer_0/tile_data = PackedInt32Array(-196611, 0, 0, -196610, 0, 0, -196609, 0, 0, -262144, 0, 0, -262143, 196608, 0, -196613, 0, 0, 458748, 65536, 0, 393212, 0, 0, 327676, 0, 0, 196604, 0, 0, 131068, 0, 0, 65532, 0, 0, -4, 0, 0, -65540, 0, 0, -131076, 0, 0, -196612, 65536, 1, 262140, 0, 0, -196614, 0, 0, -196615, 0, 0, -196616, 0, 0, -196617, 196608, 0)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 visible = false
-light_energy = 3.734
+light_energy = 8.664
 omni_range = 1816.0
 
 [node name="LightmapGI" type="LightmapGI" parent="."]

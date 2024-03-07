@@ -209,6 +209,13 @@ public partial class MazePlayer : Node3D {
 
     private void AudioStreamPlayerOnFinished() {
         Maze3D maze3D = (Maze3D)GetTree().Root.FindChild("Maze3D", true, false);
-        maze3D.LoadNextStage();
+        Timer timer = new Timer();
+        AddChild(timer);
+        Random random = new Random();
+        int waitTime = random.Next(3, 9);
+        GD.Print(waitTime + " seconds waiting");
+        timer.WaitTime = random.Next(waitTime);
+        timer.Timeout += () => maze3D.LoadNextStage();
+        timer.Start();
     }
 }

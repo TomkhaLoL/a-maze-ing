@@ -6,6 +6,8 @@ public partial class CrazyBob : Sprite3D {
 	private MazePlayer mazePlayer;
 	[Export] private Area3D area;
 	[Export] private AudioStream voiceLine;
+	[Export] public bool MoveTowardsPlayer;
+	[Export] public float MovementSpeed;
 	private bool playOnce;
 	[Export] private AudioStreamPlayer3D audioPlayer;
 
@@ -66,6 +68,13 @@ public partial class CrazyBob : Sprite3D {
 		if (mazePlayer != null) {
 			// Orient the coin towards the player
 			RotationDegrees = mazePlayer.RotationDegrees;
+		}
+
+		if (MoveTowardsPlayer) {
+			Vector3 direction = GlobalTransform.Origin.DirectionTo(mazePlayer.GlobalPosition);
+			
+			Vector3 movement = direction * MovementSpeed * (float) delta;
+			GlobalPosition = new Vector3(GlobalPosition.X + movement.X, 1, GlobalPosition.Z + movement.Z);
 		}
 	}
 }

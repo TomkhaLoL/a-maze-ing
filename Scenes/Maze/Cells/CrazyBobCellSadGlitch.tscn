@@ -1,0 +1,102 @@
+[gd_scene load_steps=14 format=3 uid="uid://racjjuj6o4iy"]
+
+[ext_resource type="Script" path="res://Scripts/Maze/MazeCell.cs" id="1_jofmj"]
+[ext_resource type="Material" uid="uid://c0hj76th5ywh0" path="res://Resources/Materials/64/FloorMaterial_64.tres" id="2_feafr"]
+[ext_resource type="Material" uid="uid://c4s7d114e1tme" path="res://Resources/Materials/64/CelingMaterial_64.tres" id="3_vlvij"]
+[ext_resource type="Material" uid="uid://bv48724dk87r5" path="res://Resources/Materials/64/WallMaterial_64.tres" id="4_v5l0f"]
+[ext_resource type="Texture2D" uid="uid://c62gpeyvcmmjq" path="res://Textures/EditedTextures/funny-face.png" id="5_lpke6"]
+[ext_resource type="Texture2D" uid="uid://c4rmuuwj16lkl" path="res://Textures/EditedTextures/funniest-face.png" id="5_wi0vb"]
+[ext_resource type="Script" path="res://Scripts/Maze/CrazyBob.cs" id="6_w5b7s"]
+[ext_resource type="Texture2D" uid="uid://cm381vdmdpvkg" path="res://Textures/EditedTextures/sad-face.png" id="7_khlp1"]
+[ext_resource type="AudioStream" uid="uid://pwomslvaruq7" path="res://Audio/Music/easy_cheesy_bitcrushed_more-48k.mp3" id="9_ohm0f"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k7o5l"]
+albedo_color = Color(0.376471, 0.356863, 0.34902, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_myxuu"]
+material = SubResource("StandardMaterial3D_k7o5l")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_flkai"]
+size = Vector3(2, 0.1, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8dpff"]
+size = Vector3(4.05353, 1, 3.78503)
+
+[node name="Cell" type="Node3D" node_paths=PackedStringArray("ceiling", "floor", "southWall", "northWall", "eastWall", "westWall")]
+script = ExtResource("1_jofmj")
+ceiling = NodePath("Ceiling")
+floor = NodePath("Floor")
+southWall = NodePath("SouthWall")
+northWall = NodePath("NorthWall")
+eastWall = NodePath("EastWall")
+westWall = NodePath("WestWall")
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+material_override = ExtResource("2_feafr")
+mesh = SubResource("PlaneMesh_myxuu")
+
+[node name="Ceiling" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, -3.48787e-16, -3.48787e-16, -3.48787e-16, -1, 8.74228e-08, -3.48787e-16, -8.74228e-08, -1, 1.28746e-05, 2, -0.00263596)
+material_override = ExtResource("3_vlvij")
+mesh = SubResource("PlaneMesh_myxuu")
+
+[node name="NorthWall" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, -4.37114e-08, -4.37114e-08, 1.91069e-15, -1, 0, 1, 1.91069e-15, 2.08165e-12, 1, -1)
+material_override = ExtResource("4_v5l0f")
+mesh = SubResource("PlaneMesh_myxuu")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NorthWall"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NorthWall/StaticBody3D"]
+shape = SubResource("BoxShape3D_flkai")
+
+[node name="SouthWall" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, 8.74228e-08, 4.37114e-08, -4.37114e-08, 1.91069e-15, -1, -8.74228e-08, -1, 1.91069e-15, 2.08165e-12, 1, 1)
+material_override = ExtResource("4_v5l0f")
+mesh = SubResource("PlaneMesh_myxuu")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="SouthWall"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SouthWall/StaticBody3D"]
+shape = SubResource("BoxShape3D_flkai")
+
+[node name="WestWall" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.31134e-07, 1, -3.82137e-15, -4.37114e-08, 1.91069e-15, -1, -1, 1.31134e-07, 4.37114e-08, -1, 1, 2.08165e-12)
+material_override = ExtResource("4_v5l0f")
+mesh = SubResource("PlaneMesh_myxuu")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="WestWall"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WestWall/StaticBody3D"]
+shape = SubResource("BoxShape3D_flkai")
+
+[node name="EastWall" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 0, -4.37114e-08, 1.91069e-15, -1, 1, -4.37114e-08, -4.37114e-08, 1, 1, 2.08165e-12)
+material_override = ExtResource("4_v5l0f")
+mesh = SubResource("PlaneMesh_myxuu")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="EastWall"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EastWall/StaticBody3D"]
+shape = SubResource("BoxShape3D_flkai")
+
+[node name="CrazyBob" type="Sprite3D" parent="." node_paths=PackedStringArray("area", "audioPlayer")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0044, 0)
+texture = ExtResource("5_wi0vb")
+script = ExtResource("6_w5b7s")
+area = NodePath("Area3D")
+audioPlayer = NodePath("AudioStreamPlayer3D")
+funnyFace = ExtResource("5_lpke6")
+sadFace = ExtResource("7_khlp1")
+
+[node name="Area3D" type="Area3D" parent="CrazyBob"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CrazyBob/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0521545, 0, 0.187927)
+shape = SubResource("BoxShape3D_8dpff")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="CrazyBob"]
+stream = ExtResource("9_ohm0f")
+volume_db = 36.721
+pitch_scale = 0.03
+autoplay = true

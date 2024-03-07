@@ -1,3 +1,4 @@
+using System;
 using Godot;
 using System.Collections.Generic;
 using System.Linq;
@@ -5,6 +6,10 @@ using System.Linq;
 public partial class Maze3D : Node3D {
 	[Export] private PackedScene nextStage;
 	[Export] private bool preview;
+	[Export] private bool postHole;
+	[Export] private bool crazyBobChase;
+	[Export] private float crazyBobMovementSpeed = 5;
+	
 
 	[Export] private PackedScene cellScene;
 	[Export] private PackedScene spawnCellScene;
@@ -14,8 +19,9 @@ public partial class Maze3D : Node3D {
 	[Export] private PackedScene crazyBobScene;
 
 	[Export] private AudioStream crazyBobVoiceLine;
+	[Export] private AudioStream stageFinishedAnnouncerLine;
 
-	[Export] private bool postHole;
+
  
 	[Export] private TileMap tileMap;
 
@@ -57,6 +63,9 @@ public partial class Maze3D : Node3D {
 			else if (atlasCoords.Equals(DESTINATION_MAZE_CELL_ATLAS_COORDS)) {
 				cell = flagCellScene.Instantiate<MazeCell>();
 				goalFlag = (GoalFlag)cell.FindChild("GoalFlag");
+				if (stageFinishedAnnouncerLine != null) {
+					goalFlag.SetStageFinishedAnnouncerLine(stageFinishedAnnouncerLine);
+				}
 				goalFlag.OnStageFinished += OnStageFinished;
 			}
 			else if (atlasCoords.Equals(HOLE_MAZE_CELL_ATLAS_COORDS)) {
@@ -66,6 +75,10 @@ public partial class Maze3D : Node3D {
 				cell = crazyBobScene.Instantiate<MazeCell>();
 				CrazyBob crazyBob = (CrazyBob) cell.FindChild("CrazyBob");
 				crazyBob.SetVoiceline(crazyBobVoiceLine);
+				if (crazyBobChase) {
+					crazyBob.MovementSpeed = crazyBobMovementSpeed;
+					crazyBob.MoveTowardsPlayer = true;
+				}
 				if (postHole) {
 					crazyBob.badBob = true;
 					crazyBob.OnBadBobStarted += BadBobStarted;
@@ -86,9 +99,6 @@ public partial class Maze3D : Node3D {
 
 	private void BadBobStarted() {
 		GetTree().Root.FindChild("PlayerCamera", true, false).QueueFree();
-		//Node3D player = (Node3D)GetTree().Root.FindChild("LabyrinthPlayer", true, true);
-		//player.QueueFree();
-		
 	}
 	
 	private void BadBobFinished() {
@@ -105,7 +115,14 @@ public partial class Maze3D : Node3D {
 	public void LoadNextStage() {
 		if (nextStage != null) {
 			Globals.singleton.coinCount = 0;
-			GetTree().ChangeSceneToPacked(nextStage);
+			Timer timer = new Timer();
+			AddChild(timer);
+			Random random = new Random();
+			int waitTime = random.Next(3, 9);
+			GD.Print(waitTime + " seconds waiting");
+			timer.WaitTime = random.Next(waitTime);
+			timer.Timeout += () => GetTree().ChangeSceneToPacked(nextStage);
+			timer.Start();
 		}
 		else {
 			GD.PushError("No next stage has been set in Maze3D, pls fix");
