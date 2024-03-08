@@ -31,6 +31,7 @@ public partial class CrazyBob : Sprite3D {
 
 	private void AreaOnAreaEntered(Area3D area3D) {
 		if (area3D.Name.Equals("PlayerArea") && !playOnce) {
+			playOnce = true;
 			if (voiceLine != null) {
 				audioPlayer.Finished += AudioPlayerOnFinished;
 				if (badBob) {
@@ -53,7 +54,7 @@ public partial class CrazyBob : Sprite3D {
 	}
 
 	private void AudioPlayerOnFinished() {
-		playOnce = true;
+		//playOnce = true;
 		if (badBob) {
 			EmitSignal(SignalName.OnBadBobFinished);
 		}

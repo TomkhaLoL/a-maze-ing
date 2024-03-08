@@ -11,9 +11,14 @@ config_version=5
 [application]
 
 config/name="a-maze-ing"
+config/description="A funny maze game for the whole family :)
+Made by Thomas \"TomkhaDev\" Gessel"
+config/version="1.0"
 run/main_scene="res://Scenes/Maze/Cells/MazeSpawnCell.tscn"
 config/features=PackedStringArray("4.2", "C#", "Forward Plus")
-config/icon="res://icon.svg"
+boot_splash/bg_color=Color(0.141176, 0.141176, 0.141176, 1)
+boot_splash/image="res://Sprites/funny-face.png"
+config/icon="res://Sprites/funny-face.png"
 
 [autoload]
 
@@ -24,6 +29,7 @@ AudioManager="*res://Scripts/Globals/AudioManager.cs"
 
 window/size/viewport_width=480
 window/size/viewport_height=360
+window/size/mode=3
 window/stretch/mode="viewport"
 
 [dotnet]

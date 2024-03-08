@@ -1,0 +1,76 @@
+[gd_scene load_steps=13 format=3 uid="uid://cgpmgjc0l4rry"]
+
+[ext_resource type="Script" path="res://Scripts/Maze/Maze3D.cs" id="1_56qy8"]
+[ext_resource type="PackedScene" uid="uid://0is34kfyee6c" path="res://Scenes/Maze/Cells/MazeCell.tscn" id="3_08l7c"]
+[ext_resource type="PackedScene" uid="uid://bbisiy4n6ylaf" path="res://Scenes/Maze/Cells/MazeSpawnCell.tscn" id="4_cwb2p"]
+[ext_resource type="PackedScene" uid="uid://cuo6bkj8lamds" path="res://Scenes/Maze/Cells/MazeCellCoin.tscn" id="5_rb5a5"]
+[ext_resource type="PackedScene" uid="uid://bqfsjyl2v547m" path="res://Scenes/Maze/Cells/MazeCellHole.tscn" id="6_acwku"]
+[ext_resource type="PackedScene" uid="uid://c6skd25tdnga0" path="res://Scenes/Maze/Cells/MazeCellGoal.tscn" id="7_sa6gf"]
+[ext_resource type="PackedScene" uid="uid://c1af0bp5tvts2" path="res://Scenes/Maze/Cells/CrazyBobCell.tscn" id="7_yysxm"]
+[ext_resource type="AudioStream" uid="uid://7b38tup4yvh3" path="res://Audio/CrazyBob/until-next-time.mp3" id="8_07xhw"]
+[ext_resource type="Resource" uid="uid://jkha3pljwo6q" path="res://Resources/TexturePack-x64.tres" id="10_03vvs"]
+[ext_resource type="PackedScene" uid="uid://dmga8f5a3ipax" path="res://Scenes/Menu/CoinUI.tscn" id="11_lvyxb"]
+[ext_resource type="PackedScene" uid="uid://v6kwtjv63bd" path="res://Resources/gametilemap.tscn" id="11_qsanc"]
+
+[sub_resource type="Environment" id="Environment_fnjlm"]
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.3434
+volumetric_fog_albedo = Color(0, 0, 0, 1)
+
+[node name="Maze3D" type="Node3D" node_paths=PackedStringArray("tileMap")]
+script = ExtResource("1_56qy8")
+postHole = true
+crazyBobMovementSpeed = 20.0
+cellScene = ExtResource("3_08l7c")
+spawnCellScene = ExtResource("4_cwb2p")
+goldCellScene = ExtResource("5_rb5a5")
+holeCellScene = ExtResource("6_acwku")
+flagCellScene = ExtResource("7_sa6gf")
+crazyBobScene = ExtResource("7_yysxm")
+crazyBobVoiceLine = ExtResource("8_07xhw")
+tileMap = NodePath("TileMap")
+texturePack = ExtResource("10_03vvs")
+
+[node name="UI" parent="." instance=ExtResource("11_lvyxb")]
+
+[node name="TileMap" parent="." instance=ExtResource("11_qsanc")]
+layer_0/tile_data = PackedInt32Array(131071, 0, 0, 196607, 0, 0, 65535, 0, 0, 65534, 0, 0, -1, 0, 0, -65537, 0, 0, -131072, 0, 0, -131071, 0, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 65538, 0, 0, 393216, 65536, 0, -27918332, 196608, 0, 327680, 0, 0, 262144, 0, 0, 196608, 0, 0, 131072, 0, 0, 65536, 0, 0, -65536, 0, 0, -196608, 196608, 0, 327681, 0, 0, 262145, 0, 0, 196609, 0, 0, 131073, 0, 0, 65537, 0, 0, -65535, 0, 0, 262142, 0, 0, 327678, 0, 0, 393214, 0, 0, 393215, 0, 0, 327679, 0, 0, 262143, 0, 0, 196606, 0, 0, 131070, 0, 0, -2, 0, 0, -65538, 0, 0, -131070, 0, 0, -65534, 0, 0, 131074, 0, 0, 196610, 0, 0, 262146, 0, 0, 327682, 0, 0, 393217, 0, 0, 393218, 0, 0, 458751, 0, 0, 458750, 0, 0, -196607, 0, 0, -196606, 0, 0, -131073, 0, 0, -131074, 0, 0)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+visible = false
+light_energy = 3.734
+omni_range = 1816.0
+
+[node name="LightmapGI" type="LightmapGI" parent="."]
+environment_mode = 3
+environment_custom_color = Color(1, 1, 1, 1)
+environment_custom_energy = 14.62
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.691676, -0.72197, -0.0185162, 0.000589451, -0.0250739, 0.999685, -0.722208, -0.691469, -0.0169175, 0, 0.737855, 1.71166)
+light_energy = 5.885
+sky_mode = 1
+
+[node name="BGMPlayer" type="AudioStreamPlayer" parent="."]
+pitch_scale = 0.87
+autoplay = true
+
+[node name="SfxPlayers" type="Node" parent="."]
+
+[node name="SfxPlayer1" type="AudioStreamPlayer" parent="SfxPlayers"]
+
+[node name="SfxPlayer2" type="AudioStreamPlayer" parent="SfxPlayers"]
+
+[node name="SfxPlayer3" type="AudioStreamPlayer" parent="SfxPlayers"]
+
+[node name="SfxPlayer4" type="AudioStreamPlayer" parent="SfxPlayers"]
+
+[node name="SfxPlayer5" type="AudioStreamPlayer" parent="SfxPlayers"]
+
+[node name="SfxPlayer6" type="AudioStreamPlayer" parent="SfxPlayers"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_fnjlm")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.27986, 0)

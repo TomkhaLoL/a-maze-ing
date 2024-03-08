@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=3 uid="uid://b6ln38vatiure"]
 
 [ext_resource type="Script" path="res://Scripts/Maze/Maze3D.cs" id="1_dmv2a"]
-[ext_resource type="PackedScene" uid="uid://dd2dp83l2ysav" path="res://Scenes/Stages/Stage2.tscn" id="2_hka5v"]
+[ext_resource type="PackedScene" uid="uid://dd2dp83l2ysav" path="res://Scenes/Stages/Stage2.tscn" id="2_uofb3"]
 [ext_resource type="PackedScene" uid="uid://0is34kfyee6c" path="res://Scenes/Maze/Cells/MazeCell.tscn" id="3_q2xq4"]
 [ext_resource type="PackedScene" uid="uid://bbisiy4n6ylaf" path="res://Scenes/Maze/Cells/MazeSpawnCell.tscn" id="4_uv3ce"]
 [ext_resource type="PackedScene" uid="uid://cuo6bkj8lamds" path="res://Scenes/Maze/Cells/MazeCellCoin.tscn" id="5_rdedx"]
@@ -10,9 +10,9 @@
 [ext_resource type="PackedScene" uid="uid://c1af0bp5tvts2" path="res://Scenes/Maze/Cells/CrazyBobCell.tscn" id="8_qt34v"]
 [ext_resource type="AudioStream" uid="uid://dewj6gckypsfp" path="res://Audio/CrazyBob/stage2.mp3" id="9_ph8b8"]
 [ext_resource type="Resource" uid="uid://jkha3pljwo6q" path="res://Resources/TexturePack-x64.tres" id="10_1ollk"]
-[ext_resource type="PackedScene" uid="uid://v6kwtjv63bd" path="res://gametilemap.tscn" id="10_xxu1i"]
-[ext_resource type="PackedScene" uid="uid://dmga8f5a3ipax" path="res://CoinUI.tscn" id="11_h8qqd"]
+[ext_resource type="PackedScene" uid="uid://dmga8f5a3ipax" path="res://Scenes/Menu/CoinUI.tscn" id="11_rrdd7"]
 [ext_resource type="AudioStream" uid="uid://ewywdswhk67p" path="res://Audio/Music/easy_cheesy_bitcrushed_base-48k.mp3" id="11_wolk0"]
+[ext_resource type="PackedScene" uid="uid://v6kwtjv63bd" path="res://Resources/gametilemap.tscn" id="12_jnoxf"]
 
 [sub_resource type="Environment" id="Environment_fnjlm"]
 volumetric_fog_enabled = true
@@ -20,7 +20,7 @@ volumetric_fog_albedo = Color(0, 0, 0, 1)
 
 [node name="Maze3D" type="Node3D" node_paths=PackedStringArray("tileMap")]
 script = ExtResource("1_dmv2a")
-nextStage = ExtResource("2_hka5v")
+nextStage = ExtResource("2_uofb3")
 cellScene = ExtResource("3_q2xq4")
 spawnCellScene = ExtResource("4_uv3ce")
 goldCellScene = ExtResource("5_rdedx")
@@ -31,9 +31,9 @@ crazyBobVoiceLine = ExtResource("9_ph8b8")
 tileMap = NodePath("TileMap")
 texturePack = ExtResource("10_1ollk")
 
-[node name="UI" parent="." instance=ExtResource("11_h8qqd")]
+[node name="UI" parent="." instance=ExtResource("11_rrdd7")]
 
-[node name="TileMap" parent="." instance=ExtResource("10_xxu1i")]
+[node name="TileMap" parent="." instance=ExtResource("12_jnoxf")]
 layer_0/tile_data = PackedInt32Array(196607, 0, 0, 65535, 0, 0, 65533, 0, 0, -1, 0, 0, -65537, 0, 0, -3, 0, 0, -65539, 65536, 1, 0, 196608, 0, 1, 0, 0, 2, 65536, 1, 65531, 65536, 0, 65532, 0, 0, 131069, 0, 0, 196605, 65536, 1, 196606, 0, 0, 65536, 0, 0, 131072, 65536, 1, -65538, 0, 0, -65534, 0, 0, -131070, 0, 0, -196606, 0, 1)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]

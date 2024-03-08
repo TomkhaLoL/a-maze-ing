@@ -1,0 +1,230 @@
+[gd_scene load_steps=25 format=3 uid="uid://dmivc5eo7wdcp"]
+
+[ext_resource type="Script" path="res://Scripts/Menu/MainMenu.cs" id="1_8id6m"]
+[ext_resource type="Script" path="res://Scripts/Menu/StageSelectButton.cs" id="2_0tin5"]
+[ext_resource type="Script" path="res://Scripts/Maze/Maze3D.cs" id="3_xu1dt"]
+[ext_resource type="PackedScene" uid="uid://cgpmgjc0l4rry" path="res://Scenes/Stages/StageHell.tscn" id="4_p82pt"]
+[ext_resource type="PackedScene" uid="uid://0is34kfyee6c" path="res://Scenes/Maze/Cells/MazeCell.tscn" id="5_r54wy"]
+[ext_resource type="PackedScene" uid="uid://bbisiy4n6ylaf" path="res://Scenes/Maze/Cells/MazeSpawnCell.tscn" id="6_scd7f"]
+[ext_resource type="PackedScene" uid="uid://cuo6bkj8lamds" path="res://Scenes/Maze/Cells/MazeCellCoin.tscn" id="7_r7t5n"]
+[ext_resource type="PackedScene" uid="uid://bqfsjyl2v547m" path="res://Scenes/Maze/Cells/MazeCellHole.tscn" id="8_431hl"]
+[ext_resource type="PackedScene" uid="uid://c6skd25tdnga0" path="res://Scenes/Maze/Cells/MazeCellGoal.tscn" id="9_6s7xd"]
+[ext_resource type="PackedScene" uid="uid://qcnlgeho031e" path="res://Scenes/Maze/Cells/CrazyBobCellSadAmbience.tscn" id="10_foo31"]
+[ext_resource type="Resource" uid="uid://jkha3pljwo6q" path="res://Resources/TexturePack-x64.tres" id="12_8740b"]
+[ext_resource type="Script" path="res://Scripts/Globals/CoinCounter.cs" id="13_3vrao"]
+[ext_resource type="PackedScene" uid="uid://v6kwtjv63bd" path="res://Resources/gametilemap.tscn" id="13_d4oe8"]
+[ext_resource type="AudioStream" uid="uid://ewywdswhk67p" path="res://Audio/Music/easy_cheesy_bitcrushed_base-48k.mp3" id="15_55uew"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j5vnu"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4ax6r"]
+bg_color = Color(0.462745, 0.462745, 0.462745, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ynele"]
+bg_color = Color(0.792157, 0.792157, 0.792157, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mjbbu"]
+bg_color = Color(0.101961, 0.101961, 0.101961, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n7v0q"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4c0lt"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ihmyd"]
+bg_color = Color(0.360784, 0.360784, 0.360784, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dlnil"]
+bg_color = Color(0.317647, 0.317647, 0.317647, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m7xjn"]
+bg_color = Color(0.152941, 0.152941, 0.152941, 1)
+
+[sub_resource type="Environment" id="Environment_fnjlm"]
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.7537
+volumetric_fog_albedo = Color(0, 0, 0, 1)
+
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("menu", "playButton", "stageSelect")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8id6m")
+menu = NodePath("Menu")
+playButton = NodePath("Menu/PlayButton")
+stageSelect = NodePath("StageSelect")
+
+[node name="TitleLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -254.0
+offset_top = 39.0
+offset_right = 254.0
+offset_bottom = 171.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 40
+text = "a-maze-ing"
+horizontal_alignment = 1
+
+[node name="Menu" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.219
+anchor_right = 0.5
+anchor_bottom = 0.219
+offset_left = -65.44
+offset_top = 76.088
+offset_right = 65.44
+offset_bottom = 288.088
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PlayButton" type="Button" parent="Menu"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_j5vnu")
+theme_override_styles/hover = SubResource("StyleBoxFlat_4ax6r")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ynele")
+theme_override_styles/focus = SubResource("StyleBoxFlat_mjbbu")
+text = "Play"
+
+[node name="StageSelect" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.292
+anchor_right = 0.5
+anchor_bottom = 0.292
+offset_left = -209.0
+offset_top = 57.88
+offset_right = 213.0
+offset_bottom = 243.88
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_n7v0q")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="StageSelect"]
+layout_mode = 2
+anchor_left = 0.498
+anchor_right = 0.5
+offset_left = -208.156
+offset_top = 3.0
+offset_right = 207.0
+offset_bottom = 49.0
+alignment = 1
+
+[node name="Button" type="Button" parent="StageSelect/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_4c0lt")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ihmyd")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_dlnil")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_m7xjn")
+text = "666"
+script = ExtResource("2_0tin5")
+stageIndex = 666
+
+[node name="Label" type="Label" parent="StageSelect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = -0.167
+anchor_right = 0.501
+anchor_bottom = -0.167
+offset_left = -279.5
+offset_top = -0.0509949
+offset_right = 279.765
+offset_bottom = 39.949
+theme_override_font_sizes/font_size = 20
+text = "Select a stage"
+horizontal_alignment = 1
+
+[node name="Maze3D" type="Node3D" parent="." node_paths=PackedStringArray("tileMap")]
+script = ExtResource("3_xu1dt")
+nextStage = ExtResource("4_p82pt")
+preview = true
+cellScene = ExtResource("5_r54wy")
+spawnCellScene = ExtResource("6_scd7f")
+goldCellScene = ExtResource("7_r7t5n")
+holeCellScene = ExtResource("8_431hl")
+flagCellScene = ExtResource("9_6s7xd")
+crazyBobScene = ExtResource("10_foo31")
+tileMap = NodePath("TileMap")
+texturePack = ExtResource("12_8740b")
+
+[node name="UI" type="Panel" parent="Maze3D"]
+visible = false
+anchors_preset = -1
+anchor_left = 0.453
+anchor_right = 0.547
+offset_left = 0.143982
+offset_right = -0.144043
+offset_bottom = 40.0
+grow_horizontal = 2
+
+[node name="CoinCounter" type="Label" parent="Maze3D/UI"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -51.0
+offset_right = 52.0
+offset_bottom = 42.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.815686, 0.572549, 0.145098, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "0
+"
+horizontal_alignment = 1
+script = ExtResource("13_3vrao")
+
+[node name="TileMap" parent="Maze3D" instance=ExtResource("13_d4oe8")]
+visible = false
+layer_0/tile_data = PackedInt32Array(131071, 65536, 1, 196607, 0, 0, 65533, 0, 0, -1, 0, 0, -131072, 0, 0, -3, 65536, 1, -65539, 0, 0, -131075, 0, 0, -196611, 0, 0, -196610, 0, 0, -196609, 0, 0, -262144, 65536, 1, -262143, 0, 0, -262142, 0, 0, -327681, 0, 0, -327683, 0, 0, -327684, 0, 0, -327685, 0, 0, 1, 0, 0, 131070, 0, 0, 131069, 0, 0, 131068, 0, 0, 262143, 65536, 0, 131067, 0, 0, 65530, 0, 0, 65529, 65536, 1, -7, 0, 0, -65543, 0, 0, -131079, 0, 0, -196615, 0, 0, -262151, 0, 0, -327686, 0, 0, 131066, 0, 0, -131078, 0, 0, -131077, 65536, 1, -131076, 0, 0, -131080, 0, 0, -131081, 0, 0, -65545, 0, 0, -65546, 0, 0, -65547, 0, 0, -11, 0, 0, 65525, 65536, 1, 131061, 0, 0, 196597, 0, 0, 262134, 0, 0, 262135, 0, 0, 262137, 0, 0, 327673, 0, 0, 327674, 0, 0, 327675, 65536, 1, 327676, 0, 0, 327677, 0, 0, 196600, 0, 0, 131064, 0, 0, 65528, 0, 0, 262141, 0, 0, 196605, 0, 0, -393219, 0, 0, -393218, 0, 0, -393217, 0, 0, -458752, 65536, 1, -458751, 0, 0, -458750, 0, 0, -393214, 0, 0, -393213, 0, 0, -327677, 0, 0, -327678, 196608, 0, -327687, 0, 0, -393223, 65536, 1, -393224, 0, 0, -393225, 0, 0, -458762, 0, 0, -458763, 0, 0, -458764, 0, 0, -393228, 65536, 1, -393229, 0, 0, -327693, 0, 0, -262157, 0, 0, -196621, 0, 0, -196620, 0, 0, -131084, 0, 0, -131083, 0, 0, -458761, 0, 0, 393210, 0, 0, 458746, 0, 0, 458745, 0, 0, 524281, 0, 0, 524280, 0, 0, 524279, 0, 0, 524278, 0, 0, 458742, 65536, 1, 458741, 0, 0, 458740, 0, 0, 327668, 0, 0, 262133, 0, 0, 393204, 0, 0, 262132, 0, 0, 524283, 0, 0, 524284, 0, 0, 524285, 0, 0, 458747, 0, 0, 524286, 65536, 1, 524287, 0, 0, 458751, 0, 0, 393216, 0, 0, 393217, 0, 0, 327681, 0, 0, 262145, 0, 0, 196609, 65536, 1, 131073, 0, 0, 65537, 0, 0, -2, 0, 0, -65536, 0, 0, -65535, 0, 0, -196608, 0, 0, -262145, 0, 0, 65524, 0, 0, 65523, 0, 0, 131058, 0, 0, 196594, 0, 0, 262130, 0, 0, 327667, 0, 0, 327666, 0, 0, 65522, 0, 0, 262136, 0, 0)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Maze3D"]
+visible = false
+light_energy = 3.734
+omni_range = 1816.0
+
+[node name="LightmapGI" type="LightmapGI" parent="Maze3D"]
+environment_mode = 3
+environment_custom_color = Color(1, 1, 1, 1)
+environment_custom_energy = 14.62
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Maze3D"]
+transform = Transform3D(0.691676, -0.72197, -0.0185162, 0.000589451, -0.0250739, 0.999685, -0.722208, -0.691469, -0.0169175, 0, 0.737855, 1.71166)
+light_energy = 5.885
+sky_mode = 1
+
+[node name="BGMPlayer" type="AudioStreamPlayer" parent="Maze3D"]
+stream = ExtResource("15_55uew")
+pitch_scale = 0.18
+autoplay = true
+
+[node name="SfxPlayers" type="Node" parent="Maze3D"]
+
+[node name="SfxPlayer1" type="AudioStreamPlayer" parent="Maze3D/SfxPlayers"]
+
+[node name="SfxPlayer2" type="AudioStreamPlayer" parent="Maze3D/SfxPlayers"]
+
+[node name="SfxPlayer3" type="AudioStreamPlayer" parent="Maze3D/SfxPlayers"]
+
+[node name="SfxPlayer4" type="AudioStreamPlayer" parent="Maze3D/SfxPlayers"]
+
+[node name="SfxPlayer5" type="AudioStreamPlayer" parent="Maze3D/SfxPlayers"]
+
+[node name="SfxPlayer6" type="AudioStreamPlayer" parent="Maze3D/SfxPlayers"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Maze3D"]
+environment = SubResource("Environment_fnjlm")

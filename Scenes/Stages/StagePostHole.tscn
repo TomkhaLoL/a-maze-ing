@@ -10,11 +10,12 @@
 [ext_resource type="PackedScene" uid="uid://bj3gbaaxd3kli" path="res://Scenes/Maze/Cells/CrazyBobCellSad.tscn" id="8_tu2m8"]
 [ext_resource type="Resource" uid="uid://jkha3pljwo6q" path="res://Resources/TexturePack-x64.tres" id="8_xhtp0"]
 [ext_resource type="AudioStream" uid="uid://dseunen1qjgjg" path="res://Audio/Announcer/spookyghost.mp3" id="9_3axa2"]
-[ext_resource type="PackedScene" uid="uid://v6kwtjv63bd" path="res://gametilemap.tscn" id="10_x0vdr"]
-[ext_resource type="PackedScene" uid="uid://dmga8f5a3ipax" path="res://CoinUI.tscn" id="11_nhree"]
+[ext_resource type="PackedScene" uid="uid://dmga8f5a3ipax" path="res://Scenes/Menu/CoinUI.tscn" id="11_4gfy7"]
+[ext_resource type="PackedScene" uid="uid://v6kwtjv63bd" path="res://Resources/gametilemap.tscn" id="12_3affe"]
 
 [sub_resource type="Environment" id="Environment_fnjlm"]
 background_mode = 1
+background_color = Color(0.219608, 0.219608, 0.219608, 1)
 ambient_light_color = Color(0.145098, 0.145098, 0.145098, 1)
 volumetric_fog_enabled = true
 volumetric_fog_density = 0.0
@@ -34,10 +35,10 @@ crazyBobVoiceLine = ExtResource("9_3axa2")
 tileMap = NodePath("TileMap")
 texturePack = ExtResource("8_xhtp0")
 
-[node name="UI" parent="." instance=ExtResource("11_nhree")]
+[node name="UI" parent="." instance=ExtResource("11_4gfy7")]
 visible = false
 
-[node name="TileMap" parent="." instance=ExtResource("10_x0vdr")]
+[node name="TileMap" parent="." instance=ExtResource("12_3affe")]
 layer_0/tile_data = PackedInt32Array(-196611, 0, 0, -196610, 0, 0, -196609, 0, 0, -262144, 0, 0, -262143, 196608, 0, -196613, 0, 0, 458748, 65536, 0, 393212, 0, 0, 327676, 0, 0, 196604, 0, 0, 131068, 0, 0, 65532, 0, 0, -4, 0, 0, -65540, 0, 0, -131076, 0, 0, -196612, 65536, 1, 262140, 0, 0, -196614, 0, 0, -196615, 0, 0, -196616, 0, 0, -196617, 196608, 0)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]

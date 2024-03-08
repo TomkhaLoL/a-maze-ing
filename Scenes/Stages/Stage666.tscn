@@ -5,12 +5,12 @@
 [ext_resource type="PackedScene" uid="uid://b8u5hpfyyqpsk" path="res://Scenes/Maze/Cells/MazeCellThin.tscn" id="2_yukrt"]
 [ext_resource type="PackedScene" uid="uid://bbisiy4n6ylaf" path="res://Scenes/Maze/Cells/MazeSpawnCell.tscn" id="3_5cuw2"]
 [ext_resource type="PackedScene" uid="uid://cuo6bkj8lamds" path="res://Scenes/Maze/Cells/MazeCellCoin.tscn" id="4_jbh2l"]
-[ext_resource type="Resource" uid="uid://c61kcrcpdftg0" path="res://Resources/TexturePack-x512.tres" id="5_255no"]
 [ext_resource type="PackedScene" uid="uid://cpht5varh4yaw" path="res://Scenes/Maze/Cells/MazeCellGoalOpen.tscn" id="6_5vha0"]
 [ext_resource type="AudioStream" uid="uid://bu6ehc504mpeb" path="res://Audio/CrazyBob/are-you-having-fun.mp3" id="6_7erjp"]
 [ext_resource type="TileSet" uid="uid://dng2cdp1yfl73" path="res://Resources/MazeTileSet.tres" id="6_dsv5v"]
 [ext_resource type="PackedScene" uid="uid://racjjuj6o4iy" path="res://Scenes/Maze/Cells/CrazyBobCellSadGlitch.tscn" id="7_yiftr"]
 [ext_resource type="AudioStream" uid="uid://pwomslvaruq7" path="res://Audio/Music/easy_cheesy_bitcrushed_more-48k.mp3" id="8_kbc13"]
+[ext_resource type="Resource" uid="uid://jkha3pljwo6q" path="res://Resources/TexturePack-x64.tres" id="9_f1pou"]
 
 [sub_resource type="Environment" id="Environment_kw6r4"]
 ssil_enabled = true
@@ -30,7 +30,7 @@ flagCellScene = ExtResource("6_5vha0")
 crazyBobScene = ExtResource("7_yiftr")
 crazyBobVoiceLine = ExtResource("6_7erjp")
 tileMap = NodePath("TileMap")
-texturePack = ExtResource("5_255no")
+texturePack = ExtResource("9_f1pou")
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource("6_dsv5v")

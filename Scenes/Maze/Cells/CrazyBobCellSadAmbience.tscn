@@ -1,13 +1,15 @@
-[gd_scene load_steps=13 format=3 uid="uid://bj3gbaaxd3kli"]
+[gd_scene load_steps=15 format=3 uid="uid://qcnlgeho031e"]
 
-[ext_resource type="Script" path="res://Scripts/Maze/MazeCell.cs" id="1_p1yd1"]
-[ext_resource type="Material" uid="uid://c0hj76th5ywh0" path="res://Resources/Materials/64/FloorMaterial_64.tres" id="2_u75am"]
-[ext_resource type="Material" uid="uid://c4s7d114e1tme" path="res://Resources/Materials/64/CelingMaterial_64.tres" id="3_ji3vo"]
-[ext_resource type="Material" uid="uid://bv48724dk87r5" path="res://Resources/Materials/64/WallMaterial_64.tres" id="4_kf6db"]
-[ext_resource type="Texture2D" uid="uid://ctrqbdhv4wa4w" path="res://Sprites/funniest-face-normal.png" id="5_almqe"]
-[ext_resource type="Script" path="res://Scripts/Maze/CrazyBob.cs" id="6_31vmq"]
-[ext_resource type="Texture2D" uid="uid://c62gpeyvcmmjq" path="res://Sprites/funny-face.png" id="7_7tphu"]
-[ext_resource type="Texture2D" uid="uid://cm381vdmdpvkg" path="res://Sprites/sad-face.png" id="8_7qyx4"]
+[ext_resource type="Script" path="res://Scripts/Maze/MazeCell.cs" id="1_p5k1p"]
+[ext_resource type="Material" uid="uid://c0hj76th5ywh0" path="res://Resources/Materials/64/FloorMaterial_64.tres" id="2_xg7ex"]
+[ext_resource type="Material" uid="uid://c4s7d114e1tme" path="res://Resources/Materials/64/CelingMaterial_64.tres" id="3_04fic"]
+[ext_resource type="Material" uid="uid://bv48724dk87r5" path="res://Resources/Materials/64/WallMaterial_64.tres" id="4_55h8j"]
+[ext_resource type="Texture2D" uid="uid://ctrqbdhv4wa4w" path="res://Sprites/funniest-face-normal.png" id="5_0b7he"]
+[ext_resource type="Script" path="res://Scripts/Maze/CrazyBob.cs" id="6_parq1"]
+[ext_resource type="Texture2D" uid="uid://c62gpeyvcmmjq" path="res://Sprites/funny-face.png" id="7_bm2yf"]
+[ext_resource type="Texture2D" uid="uid://cm381vdmdpvkg" path="res://Sprites/sad-face.png" id="8_xqgcb"]
+[ext_resource type="AudioStream" uid="uid://dajnhwxyc67gq" path="res://Audio/CrazyBob/ending-scare.mp3" id="9_f0xbs"]
+[ext_resource type="AudioStream" uid="uid://pwomslvaruq7" path="res://Audio/Music/easy_cheesy_bitcrushed_more-48k.mp3" id="10_knitg"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k7o5l"]
 albedo_color = Color(0.376471, 0.356863, 0.34902, 1)
@@ -22,7 +24,7 @@ size = Vector3(2, 0.1, 2)
 size = Vector3(4.05353, 1, 3.78503)
 
 [node name="Cell" type="Node3D" node_paths=PackedStringArray("ceiling", "floor", "southWall", "northWall", "eastWall", "westWall")]
-script = ExtResource("1_p1yd1")
+script = ExtResource("1_p5k1p")
 ceiling = NodePath("Ceiling")
 floor = NodePath("Floor")
 southWall = NodePath("SouthWall")
@@ -31,17 +33,17 @@ eastWall = NodePath("EastWall")
 westWall = NodePath("WestWall")
 
 [node name="Floor" type="MeshInstance3D" parent="."]
-material_override = ExtResource("2_u75am")
+material_override = ExtResource("2_xg7ex")
 mesh = SubResource("PlaneMesh_myxuu")
 
 [node name="Ceiling" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, -3.48787e-16, -3.48787e-16, -3.48787e-16, -1, 8.74228e-08, -3.48787e-16, -8.74228e-08, -1, 1.28746e-05, 2, -0.00263596)
-material_override = ExtResource("3_ji3vo")
+material_override = ExtResource("3_04fic")
 mesh = SubResource("PlaneMesh_myxuu")
 
 [node name="NorthWall" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, -4.37114e-08, -4.37114e-08, 1.91069e-15, -1, 0, 1, 1.91069e-15, 2.08165e-12, 1, -1)
-material_override = ExtResource("4_kf6db")
+material_override = ExtResource("4_55h8j")
 mesh = SubResource("PlaneMesh_myxuu")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="NorthWall"]
@@ -51,7 +53,7 @@ shape = SubResource("BoxShape3D_flkai")
 
 [node name="SouthWall" type="MeshInstance3D" parent="."]
 transform = Transform3D(-1, 8.74228e-08, 4.37114e-08, -4.37114e-08, 1.91069e-15, -1, -8.74228e-08, -1, 1.91069e-15, 2.08165e-12, 1, 1)
-material_override = ExtResource("4_kf6db")
+material_override = ExtResource("4_55h8j")
 mesh = SubResource("PlaneMesh_myxuu")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="SouthWall"]
@@ -61,7 +63,7 @@ shape = SubResource("BoxShape3D_flkai")
 
 [node name="WestWall" type="MeshInstance3D" parent="."]
 transform = Transform3D(1.31134e-07, 1, -3.82137e-15, -4.37114e-08, 1.91069e-15, -1, -1, 1.31134e-07, 4.37114e-08, -1, 1, 2.08165e-12)
-material_override = ExtResource("4_kf6db")
+material_override = ExtResource("4_55h8j")
 mesh = SubResource("PlaneMesh_myxuu")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="WestWall"]
@@ -71,7 +73,7 @@ shape = SubResource("BoxShape3D_flkai")
 
 [node name="EastWall" type="MeshInstance3D" parent="."]
 transform = Transform3D(-4.37114e-08, -1, 0, -4.37114e-08, 1.91069e-15, -1, 1, -4.37114e-08, -4.37114e-08, 1, 1, 2.08165e-12)
-material_override = ExtResource("4_kf6db")
+material_override = ExtResource("4_55h8j")
 mesh = SubResource("PlaneMesh_myxuu")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="EastWall"]
@@ -80,13 +82,13 @@ mesh = SubResource("PlaneMesh_myxuu")
 shape = SubResource("BoxShape3D_flkai")
 
 [node name="CrazyBob" type="Sprite3D" parent="." node_paths=PackedStringArray("area", "audioPlayer")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0044, 0)
-texture = ExtResource("5_almqe")
-script = ExtResource("6_31vmq")
+transform = Transform3D(1.72532, 0, 0, 0, 1.83566, 0, 0, 0, 1, 0, 1.0044, 0)
+texture = ExtResource("5_0b7he")
+script = ExtResource("6_parq1")
 area = NodePath("Area3D")
 audioPlayer = NodePath("AudioStreamPlayer3D")
-funnyFace = ExtResource("7_7tphu")
-sadFace = ExtResource("8_7qyx4")
+funnyFace = ExtResource("7_bm2yf")
+sadFace = ExtResource("8_xqgcb")
 
 [node name="Area3D" type="Area3D" parent="CrazyBob"]
 
@@ -95,4 +97,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0521545, 0, 0.187927)
 shape = SubResource("BoxShape3D_8dpff")
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="CrazyBob"]
-volume_db = 6.557
+stream = ExtResource("9_f0xbs")
+volume_db = 4.371
+pitch_scale = 0.65
+autoplay = true
+max_distance = 100.0
+
+[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="CrazyBob"]
+transform = Transform3D(0.579601, 0, 0, 0, 0.544763, 0, 0, 0, 1, 0, 0, 0)
+stream = ExtResource("10_knitg")
+volume_db = 4.371
+pitch_scale = 0.1
+autoplay = true
+max_distance = 100.0
